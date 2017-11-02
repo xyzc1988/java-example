@@ -1,0 +1,24 @@
+{
+  "tid": "t1",
+  "name": "wuwei",
+  "students": [
+    {
+      "sid": "s1",
+      "address": "jinan",
+      "email": "email",
+      "name": "zhangcheng",
+      "birthday": {
+        "birthday": "2010-11-22"
+      }
+    },
+    {
+      "sid": "s2",
+      "address": "taian",
+      "email": "emailadfa@",
+      "name": "yhwe",
+      "birthday": {
+        "birthday": "2010-11-11"
+      }
+    }
+  ]
+}

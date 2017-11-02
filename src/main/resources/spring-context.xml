@@ -11,15 +11,12 @@
     	http://www.springframework.org/schema/tx
     	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-
-    
     <!-- 配置读取外部配置文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" />
     
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
         destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
         p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
-        
 
 	<!-- sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

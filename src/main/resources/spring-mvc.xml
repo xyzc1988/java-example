@@ -39,7 +39,7 @@
     <!-- 静态资源由Web应用服务器默认的Servlet处理 -->
     <mvc:default-servlet-handler/>
 
-    <context:component-scan base-package="com.hxht">
+    <context:component-scan base-package="io.github.xyzc1988">
         <!-- 排除扫描service标签 -->
         <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
     </context:component-scan>
@@ -51,5 +51,4 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
 </beans>
