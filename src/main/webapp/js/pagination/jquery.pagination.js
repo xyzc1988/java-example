@@ -1,6 +1,5 @@
 /**
  * pagination分页插件
- * @author zhangcheng
  * @参照github https://github.com/Maxiaoxiang/jQuery-plugins
  * @参照github https://github.com/gbirke/jquery_pagination
  *
@@ -220,19 +219,16 @@
             });
             //输入跳转的页码
             $element.on('input propertychange', '.' + opts.jumpIptCls, function () {
-                var $this = $(this);
-                var val = $val();
+                var pageId = this.value
                 var reg = /[^\d]/g;
-                if (reg.test(val)) {
-                    $this.val(val.replace(reg, ''));
+                if (reg.test(pageId)) {
+                    this.value =  pageId.replace(reg, '');
                 }
-                (parseInt(val) > opts.totalPage) && $this.val(opts.totalPage);
-                if (parseInt(val) === 0) {//最小值为1
-                    $this.val(1);
-                }
+                pageId = pageId < 1 ? 1 : (pageId < opts.totalPage ? pageId : opts.totalPage);
+                this.value = pageId;
             });
             //回车跳转指定页码
-            $(document).keydown(function (e) {
+            $(document).off().keydown(function (e) {
                 if (e.keyCode == 13 && $element.find('.' + opts.jumpIptCls).val()) {
                     var index = parseInt($element.find('.' + opts.jumpIptCls).val());
                     that.filling(index);
