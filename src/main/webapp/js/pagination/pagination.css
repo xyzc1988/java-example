@@ -1,0 +1,102 @@
+@charset "UTF-8";
+.demo-image {
+    width: 100%;
+}
+
+.pagination {
+    display: inline-block !important;
+    margin: 0px 0px 20px 200px !important;
+    text-align: center;
+    zoom: 1;
+    font-size: 14px;
+    font-family: "微软雅黑";
+}
+
+.pagination:before, .pagination:after {
+    content: "";
+    display: table;
+}
+
+.pagination:after {
+    clear: both;
+    overflow: hidden;
+}
+
+.pagination span {
+    display: inline-block;
+    margin: 0 3px;
+    color: #4d6e86;
+    padding: 0.4em 0.7em;
+}
+
+.pagination span.disabled {
+    border: 1px solid #ebebeb;
+    cursor: not-allowed;
+    background: #ffffff;
+    opacity: 0.65;
+}
+
+.pagination .active {
+    display: inline-block;
+    margin: 0 3px;
+    padding: 0.3em 0.7em;
+    background: #4d6e86;
+    color: #fff;
+    border: 1px solid #4d6e86;
+}
+
+.pagination a {
+    display: inline-block;
+    margin: 0 3px;
+    border: 1px solid #ccc;
+    color: #4d6e86;
+    padding: 0.3em 0.7em;
+}
+
+.pagination a:hover, .pagination input.jump-ipt:hover, .pagination a.jump-btn:hover {
+    color: #4d6e86;
+    background: #eee;
+    border: 1px solid #ddd;
+}
+
+.now, .count {
+    padding: 0 5px;
+    color: #4d6e86;
+}
+
+.eg img {
+    max-width: 800px;
+    min-height: 500px;
+}
+
+.pagination input {
+    width: 49px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.pagination span.page-info {
+    margin: 0 0px;
+}
+
+.pagination input.jump-ipt {
+    margin: 0px;
+    background: #f9f9f9;
+    float: left;
+    padding: 0;
+}
+
+.pagination a.jump-btn {
+    margin: 0px;
+    background: #fff;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    padding:0;
+}
+
+.pagination div {
+    display: inline-block;
+}

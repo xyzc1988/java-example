@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    	http://www.springframework.org/schema/context 
+    	http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+    	http://www.springframework.org/schema/tx
+    	http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+
+    <!-- bean definitions here -->
+    <context:component-scan base-package="io.github.xyzc1988" />
+    
+    <!-- 配置读取外部配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+        
+    <context:annotation-config /> <!-- 此行语句使得resource autowired 等四个注解可以使用 -->
+    
+	<!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml" />
+    </bean>
+    
+    <!-- mapper 扫描器 (如增加新的模块mapper,则使用,号隔开即可)-->  
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->  
+        <property name="basePackage" value="com.etoak.org.mapper,com.etoak.map.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
+    </bean>
+    
+    <!-- 实例化jdbcTemplate,同时注入数据源 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+        p:dataSource-ref="dataSource" />
+    
+    <!-- 配置事务管理器 -->
+    <bean id="txManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <!-- 事务扫描开始(开启@Transactional) -->
+    <tx:annotation-driven transaction-manager="txManager" />
+</beans>

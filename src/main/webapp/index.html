@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="./css/common.css" rel="stylesheet"/>
+    <link href="./js/pagination/pager.css" rel="stylesheet"/>
+    <link href="./js/pagination/pagination.css" rel="stylesheet"/>
+    <script type="text/javascript" src="./js/jquery/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="./js/pagination/jqPagination.js"></script>
+    <script type="text/javascript" src="./js/pagination/jquery.pagination.js"></script>
+   <!-- <script type="text/javascript" src="./js/pagination/mricode.pagination.js"></script>-->
+
+    <script type="text/javascript">
+        $(function () {
+            $('#pager').jqPagination({
+                url: "./page/getPage",
+                pageSize: 1,
+                paginationClass: "pager",
+                showJump: true,
+                param: {
+                    a: 1
+                },
+                success: function (data) {
+                     //返回的数据根据自己需要处理
+                    var tableStr = "<tr><td>Id</td><td>姓名</td><td>年龄</td></tr>";
+                    $.each(data.data, function (i, v) {
+                        tableStr += "<tr><td>" + v.name + "</td><td>" + v.china + "</td><td>" + v.type + "</td></tr>";
+                    });
+
+                    $('#dataTable').html(tableStr);
+                },
+                complete: function () {
+                }
+            });
+            /*$.ajax({
+                url: "./page/getPage",
+                type: "POST",
+                dataType: "JSON",
+                data: JSON.stringify({pageIndex: 1, pageSize: 1}),
+                contentType:"application/json",
+            }).then(function (data) {
+                rendHtml(data)
+                $('#pager').pagination({
+                    pageSize:1,
+                    totalCount:data.totalCount,
+                    prevContent: '上页',		//上一页内容
+                    nextContent: '下页',
+                    jump:true,
+                    callback: function (api) {
+                        var pageIndex = api.getPageIndex();
+                        $.ajax({
+                            url: "./page/getPage",
+                            type: "POST",
+                            dataType: "JSON",
+                            data: JSON.stringify({pageIndex: pageIndex, pageSize: 1}),
+                            contentType: "application/json",
+                        }).then(function (data) {
+                            rendHtml(data);
+                        })
+                    }
+                });
+
+            })*/
+
+        });
+        function rendHtml(data) {
+            var tableStr = "<tr><td>Id</td><td>姓名</td><td>年龄</td></tr>";
+            $.each(data.data, function (i, v) {
+                tableStr += "<tr><td>" + v.name + "</td><td>" + v.china + "</td><td>" + v.type + "</td></tr>";
+            });
+
+            $('#dataTable').html(tableStr);
+        }
+    </script>
+</head>
+<body>
+
+<table id="dataTable" border="1" style="width: 100%"></table>
+<br/>
+<div id="pager"></div>
+
+<img id="image" src="./page/getImage" style="width: 50px;height: 50px;"/>
+</body>
+</html>

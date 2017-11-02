@@ -1,0 +1,24 @@
+# "temporary" build files
+target/
+out/
+build/
+
+#.gitignore for java
+*.class
+
+#Eclipse
+.metadata
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+#JetBrains
+*.iml
+*.ipr
+*.iws
+.idea/

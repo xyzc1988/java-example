@@ -1,0 +1,80 @@
+/**pager**/
+.pager {
+    padding: 0px 10px;
+    float: right;
+}
+
+.pager span {
+    /* display: block; */
+    float: left;
+    padding: 0.2em 0.7em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.pager span.active {
+    background: #26B;
+    color: #fff;
+    border: solid 1px #AAE;
+}
+
+.pager span.disabled {
+    color: #999;
+    border-color: #999;
+    background: #fff;
+    border: solid 1px #AAE;
+}
+
+.pager span.page-info {
+    padding: 0.3em 0;
+    color: #999999;
+}
+
+.pager a {
+    display: block;
+    float: left;
+    padding: 0.2em 0.5em;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-decoration: none;
+    border: solid 1px #AAE;
+    color: #15B;
+}
+
+.pager a:hover {
+    border: solid 1px #26B;
+    color: #26B;
+}
+
+.pager input {
+    padding: 0px 2px;
+    border: solid 1px #AAE;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.pager button {
+    cursor: pointer;
+    border: solid 1px #AAE;
+    height: 25px;
+    line-height: 25px;
+    /* float: left; */
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 0px 3px;
+    color: #404040;
+    background: white;
+}
+
+.pager button:hover {
+    border: solid 1px #26B;
+    color: #26B;
+}
+.pager div {
+    display: inline-block;
+}
