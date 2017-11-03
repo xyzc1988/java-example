@@ -1,27 +1,26 @@
 package io.github.xyzc1988.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.thoughtworks.xstream.core.util.Base64Encoder;
 import io.github.xyzc1988.common.bean.PaginationModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.stream.ImageInputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.System.in;
 
 /**
  * Created by zhangcheng on 2017/10/24.
@@ -54,11 +53,31 @@ public class PageController {
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(fileName));
+            response.setHeader("Content-Type", "image/png");
+            response.setHeader("Content-Disposition", "attachment;filename=aaa.png");
+
             ServletOutputStream outputStream = response.getOutputStream();
             outputStream.write(bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("/getBase64Image")
+    @ResponseBody
+    public String getBase64Image(HttpServletRequest request, HttpServletResponse response) {
+
+        String fileName = request.getServletContext().getRealPath("/") + "images\\1.png";
+
+        try {
+            byte[] bytes = Files.readAllBytes(Paths.get(fileName));
+            BASE64Encoder encoder = new BASE64Encoder();
+            String encode = encoder.encode(bytes);
+            return encode;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

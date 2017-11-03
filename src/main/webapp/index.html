@@ -2,13 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="./js/pagination/pager.css" rel="stylesheet"/>
     <link href="./js/pagination/pagination.css" rel="stylesheet"/>
     <script type="text/javascript" src="./js/jquery/jquery-3.2.1.js"></script>
+    <!--jQuery2.0+不再支持IE8-->
+    <!--[if lte IE 8]>
+    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdn.bootcss.com/es5-shim/4.5.9/es5-sham.min.js"></script>
+    <script src="https://cdn.bootcss.com/json3/3.3.2/json3.min.js"></script>
+    <![endif]-->
     <script type="text/javascript" src="./js/pagination/jqPagination.js"></script>
     <script type="text/javascript" src="./js/pagination/jquery.pagination.js"></script>
-   <!-- <script type="text/javascript" src="./js/pagination/mricode.pagination.js"></script>-->
+    <!-- <script type="text/javascript" src="./js/pagination/mricode.pagination.js"></script>-->
 
     <script type="text/javascript">
         $(function () {
@@ -21,7 +28,7 @@
                     a: 1
                 },
                 success: function (data) {
-                     //返回的数据根据自己需要处理
+                    //返回的数据根据自己需要处理
                     var tableStr = "<tr><td>Id</td><td>姓名</td><td>年龄</td></tr>";
                     $.each(data.data, function (i, v) {
                         tableStr += "<tr><td>" + v.name + "</td><td>" + v.china + "</td><td>" + v.type + "</td></tr>";
@@ -61,8 +68,16 @@
                 });
 
             })*/
+            $.ajax({
+                url: "./page/getBase64Image",
+                type: "GET",
+            }).then(function (data) {
+                $("#image1").attr("src", "data:image/png;base64," + data);
+
+            });
 
         });
+
         function rendHtml(data) {
             var tableStr = "<tr><td>Id</td><td>姓名</td><td>年龄</td></tr>";
             $.each(data.data, function (i, v) {
@@ -80,5 +95,7 @@
 <div id="pager"></div>
 
 <img id="image" src="./page/getImage" style="width: 50px;height: 50px;"/>
+
+<img id="image1"  style="width: 50px;height: 50px;"/>
 </body>
 </html>
