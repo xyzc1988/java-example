@@ -1,16 +1,16 @@
 package io.github.xyzc1988.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.thoughtworks.xstream.core.util.Base64Encoder;
 import io.github.xyzc1988.common.bean.PaginationModel;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
+import org.springframework.web.util.WebUtils;
 import sun.misc.BASE64Encoder;
 
-import javax.imageio.stream.ImageInputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -71,14 +71,11 @@ public class PageController {
 
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(fileName));
-            BASE64Encoder encoder = new BASE64Encoder();
-            String encode = encoder.encode(bytes);
-            return encode;
+            String base64String = Base64.encodeBase64String(bytes);
+            return "data:image/png;base64," + base64String;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-
 }

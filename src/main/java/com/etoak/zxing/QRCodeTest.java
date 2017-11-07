@@ -32,9 +32,7 @@ public class QRCodeTest {
         String filePath = "D://";
         String fileName = "zxing.png";
         JSONObject json = new JSONObject();
-        json.put(
-                "zxing",
-                "https://github.com/zxing/zxing/tree/zxing-3.0.0/javase/src/main/java/com/google/zxing");
+        json.put("zxing", "https://github.com/zxing/zxing/tree/zxing-3.0.0/javase/src/main/java/com/google/zxing");
         json.put("author", "张程");
         String content = json.toJSONString();// 内容
         int width = 200; // 图像宽度
