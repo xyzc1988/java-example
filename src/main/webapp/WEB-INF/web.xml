@@ -14,7 +14,7 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!-- 项目目录监听器 -->
+    <!-- 监听项目根目录,默认保存为webapp.root为key的系统属性-->
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>

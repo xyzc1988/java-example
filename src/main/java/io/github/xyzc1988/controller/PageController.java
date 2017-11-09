@@ -3,13 +3,18 @@ package io.github.xyzc1988.controller;
 import com.alibaba.fastjson.JSON;
 import io.github.xyzc1988.common.bean.PaginationModel;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
-import org.springframework.web.util.WebUtils;
-import sun.misc.BASE64Encoder;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +55,7 @@ public class PageController {
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
 
         String fileName = request.getServletContext().getRealPath("/") + "images\\1.png";
-        String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
+
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(fileName));
             response.setHeader("Content-Type", "image/png");
@@ -67,15 +72,31 @@ public class PageController {
     @ResponseBody
     public String getBase64Image(HttpServletRequest request, HttpServletResponse response) {
 
-        String fileName = request.getServletContext().getRealPath("/") + "images\\1.png";
-
+        String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {
-            byte[] bytes = Files.readAllBytes(Paths.get(fileName));
+            byte[] bytes = Files.readAllBytes(Paths.get(path + "/images/1.png"));
             String base64String = Base64.encodeBase64String(bytes);
             return "data:image/png;base64," + base64String;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    @RequestMapping("/getImageBody")
+    @ResponseBody
+    public byte[] getImageBody(HttpServletRequest request, HttpServletResponse response) {
+        ServletContextResource servletContextResource = new ServletContextResource(ContextLoader.getCurrentWebApplicationContext().getServletContext(), "/images/1.png");
+        try {
+            InputStream inputStream = servletContextResource.getInputStream();
+            byte[] bytes = FileCopyUtils.copyToByteArray(inputStream);
+            response.setHeader("Content-Type", "image/png");
+            response.setHeader("Content-Disposition", "attachment;filename=bbb.png");
+            return bytes;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new byte[0];
     }
 }

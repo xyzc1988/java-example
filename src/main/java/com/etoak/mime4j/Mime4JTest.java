@@ -13,6 +13,9 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -52,6 +55,10 @@ public class Mime4JTest {
     public void test() throws IOException, MimeException, InvalidFormatException, URISyntaxException {
         URL resource = this.getClass().getResource("/mail/IGXE验证消息_.eml");
         InputStream newInputStream = Files.newInputStream(Paths.get(resource.toURI()));
+
+        Resource classPathResource = new ClassPathResource("/mail/IGXE验证消息_.eml");
+        newInputStream =  classPathResource.getInputStream();
+
         MimeTokenStream stream = new MimeTokenStream();
         stream.parse(newInputStream);
         for (EntityState state = stream.getState();
