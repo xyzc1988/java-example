@@ -55,8 +55,9 @@
 
 .pagination a:hover, .pagination input.jump-ipt:hover, .pagination a.jump-btn:hover {
     color: #4d6e86;
-    background: #eee;
-    border: 1px solid #ddd;
+    /*! background: #eee; */
+    border: 1px solid #4d6e86;
+    /*! border-radius: 3px; */
 }
 
 .now, .count {
@@ -83,14 +84,14 @@
 
 .pagination input.jump-ipt {
     margin: 0px;
-    background: #f9f9f9;
+    background: #fff;
     float: left;
     padding: 0;
 }
 
 .pagination a.jump-btn {
     margin: 0px;
-    background: #fff;
+    background: #f9f9f9;
     width: 32px;
     height: 32px;
     line-height: 32px;
