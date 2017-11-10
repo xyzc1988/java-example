@@ -1,0 +1,584 @@
+/**
+ * ============================================================
+ * 样式重置
+ * ============================================================
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+html,
+body {
+    font-family: "microsoft yahei", sans-serif;
+    font-size: 12px;
+    color: #333333;
+    line-height: 1.5;
+}
+a {
+    color: #333333;
+    text-decoration: none;
+}
+img {
+    border: 0;
+}
+li {
+    list-style: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #DDDDDD;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #DDDDDD;
+    width: 100%;
+}
+table th,
+table td {
+    text-align: left;
+    border-top: none;
+    border-right: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    border-left: none;
+    padding: 10px 15px;
+    font-size: 12px;
+}
+i {
+    font-style: normal;
+}
+input[type=text],
+input[type=password],
+select {
+    border: 1px solid #DDDDDD;
+    border-radius: 2px;
+    padding: 12px 10px;
+    font-size: 12px;
+    color: #6F6F6F;
+    width: 300px;
+}
+select option {
+    
+    width:100%;
+}
+:-moz-placeholder {
+    color: #9B9B9B;
+}
+::-moz-placeholder {
+    color: #9B9B9B;
+}
+input:-ms-input-placeholder {
+    color: #9B9B9B;
+}
+input::-webkit-input-placeholder {
+    color: #9B9B9B;
+}
+
+/**
+ * ============================================================
+ * 辅助类
+ * ============================================================
+ */
+
+
+/*清除浮动*/
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+.clearfix:after {
+    clear: both;
+}
+
+/*过渡*/
+
+.lion-transition-250 {
+    transition: all .25s;
+    -ms-transition: all .25s;
+    -moz-transition: all .25s;
+    -webkit-transition: all .25s;
+}
+.lion-transition-500 {
+    transition: all .5s;
+    -ms-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+}
+
+/*小三角*/
+
+.lion-triangle {
+    font-size: 0;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: -2px;
+    border: 0 dashed transparent;
+    border-width: 8px;
+}
+.lion-triangle-top {
+    border-bottom-style: solid;
+    border-bottom-color: #0090A5;
+}
+.lion-triangle-bottom {
+    border-top-style: solid;
+    border-top-color: #0090A5;
+}
+.lion-triangle-left {
+    border-right-style: solid;
+    border-right-color: #0090A5;
+}
+.lion-triangle-right {
+    border-left-style: solid;
+    border-left-color: #0090A5;
+}
+.lion-triangle-left-top {
+    border-top-style: solid;
+    border-top-color: #0090A5;
+    border-left-width: 0 !important;
+}
+.lion-triangle-right-top {
+    border-top-style: solid;
+    border-top-color: #0090A5;
+    border-right-width: 0 !important;
+}
+.lion-triangle-left-bottom {
+    border-bottom-style: solid;
+    border-bottom-color: #0090A5;
+    border-left-width: 0 !important;
+}
+.lion-triangle-right-bottom {
+    border-bottom-style: solid;
+    border-bottom-color: #0090A5;
+    border-right-width: 0 !important;
+}
+
+/*多余内容转换成省略号*/
+
+.lion-overflow-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/**
+ * ============================================================
+ * 按钮类
+ * ============================================================
+ */
+
+
+/*默认按钮*/
+
+.lion-btn {
+    display: inline-block;
+    border: 1px solid #1AA094;
+    background-color: #1AA094;
+    vertical-align: middle;
+    padding: 6px 16px;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 12px;
+    background-image: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    transition: all .25s;
+    -ms-transition: all .25s;
+    -moz-transition: all .25s;
+    -webkit-transition: all .25s;
+    box-shadow: 0px -2px 0px rgba(0, 0, 0, .05) inset;
+    color: #FFFFFF;
+}
+.lion-btn:hover {
+    border-color: #158E83;
+    background-color: #158E83;
+}
+
+/*浅色按钮*/
+
+.lion-btn-light {
+    color: #333333;
+    border-color: #DDDDDD;
+    background-color: #FFFFFF;
+}
+.lion-btn-light:hover {
+    border-color: #D3D3D3;
+    background-color: #E6E6E6;
+}
+
+/*主要按钮*/
+
+.lion-btn-primary {
+    color: #FFFFFF;
+    border-color: #2c699d;
+    background-color: #3276b1;
+}
+.lion-btn-primary:hover {
+    border-color: #1F496D;
+    background-color: #275B89;
+}
+
+/*信息按钮*/
+
+.lion-btn-info {
+    color: #FFFFFF;
+    background-color: #57889C;
+    border-color: #4E7A8C;
+}
+.lion-btn-info:hover {
+    border-color: #385764;
+    background-color: #456B7B;
+}
+
+/*成功按钮*/
+
+.lion-btn-success {
+    color: #FFFFFF;
+    border-color: #34A8FF;
+    background-color: #34A8FF;
+}
+.lion-btn-success:hover {
+    border-color: #2C9DF0;
+    background-color: #2C9DF0;
+}
+
+/*警告按钮*/
+
+.lion-btn-warning {
+    color: #FFFFFF;
+    border-color: #B1811D;
+    background-color: #C79121;
+}
+.lion-btn-warning:hover {
+    border-color: #7D5B15;
+    background-color: #9B711A;
+}
+
+/*危险按钮*/
+.lion-btn-danger {
+    color: #FFFFFF;
+    border-color: #900323;
+    background-color: #A90329;
+}
+.lion-btn-danger:hover {
+    border-color: #540114;
+    background-color: #77021D;
+}
+
+/*状态按钮*/
+.lion-btn-state {
+    color: #FFFFFF;
+    border-color: #739e73;
+    background-color: #659265;
+}
+.lion-btn-state:hover {
+    border-color: #648B64;
+    background-color: #588158;
+}
+
+/*大型按钮*/
+
+.lion-btn-large {
+    padding: 10px 26px;
+    font-size: 16px;
+}
+
+/*小型按钮*/
+
+.lion-btn-small {
+    padding: 2px 8px 2px;
+    font-size: 12px;
+}
+
+/*迷你按钮*/
+
+.lion-btn-mini {
+    padding: 1px 5px;
+    font-size: 12px;
+}
+
+/*禁用按钮*/
+
+.lion-btn-disabled {
+    pointer-events: none;
+    opacity: .5;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/*块级按钮*/
+
+.lion-btn-block {
+    display: block;
+    width: 100%;
+}
+
+/*圆角按钮*/
+
+.lion-btn-radius {
+    border-radius: 20px;
+    outline: none;
+}
+
+/*文件上传按钮*/
+
+.lion-btn-file {
+    position: relative;
+}
+.lion-btn-file input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+}
+
+/*倒计时按钮*/
+.lion-btn-countdown .second {
+    color: #FD734C;
+    margin: 0px 3px;
+}
+
+/**
+ * ============================================================
+ * 表单
+ * ============================================================
+ */
+
+
+/*文本框-lion-input-mercury*/
+
+.lion-input-mercury,
+.lion-input-venus {
+    display: inline-block;
+    position: relative;
+}
+.lion-input-mercury .enter,
+.lion-input-venus .enter {
+    width: 300px;
+    padding-left: 40px;
+    outline: none;
+    vertical-align: top;
+}
+.lion-input-mercury .graphic,
+.lion-input-venus .graphic {
+    width: 30px;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 0px;
+    text-align: center;
+    font-size: 14px;
+    color: #999999;
+    border-right: 1px solid #DDDDDD;
+}
+
+/*倒计时-lion-input-venus*/
+
+.lion-input-venus .enter {
+    width: 190px;
+}
+.lion-input-venus .button {
+    height: 100%;
+    padding: 11px 20px;
+    margin-left: -6px;
+    vertical-align: top;
+}
+
+/*文件上传框-lion-upload-mercury*/
+
+.lion-upload-mercury {
+    display: inline-block;
+    position: relative;
+    width: 360px;
+    height: 34px;
+    line-height: 32px;
+}
+.lion-upload-mercury input[type=text] {
+    border: 1px solid #DDDDDD;
+    padding: 0px 35px 0px 8px;
+    height: 34px;
+    width: 100%;
+    color: #666666;
+}
+.lion-upload-mercury .graphic-add {
+    position: absolute;
+    width: 34px;
+    height: 100%;
+    background-color: #1AA094;
+    color: #FFFFFF;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    transition: all .25s;
+    -ms-transition: all .25s;
+    -moz-transition: all .25s;
+    -webkit-transition: all .25s;
+}
+.lion-upload-mercury .graphic-add.hover {
+    background-color: #158E83;
+}
+.lion-upload-mercury input[type=file] {
+    position: absolute;
+    width: 34px;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    z-index: 2;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/**
+ * ============================================================
+ * 流程 
+ * ============================================================
+ */
+
+
+/*流程-lion-step-mercury*/
+
+.lion-step-mercury li {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 76px;
+    padding-right: 50px;
+    background-color: #BABABA;
+    color: #FFFFFF;
+    position: relative;
+}
+.lion-step-mercury li:first-child {
+    padding-left: 50px;
+}
+.lion-step-mercury .step {
+    display: inline-block;
+    background-color: #D5D1D0;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 16px;
+    margin-right: 6px;
+}
+.lion-step-mercury .triangle-wrap {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    top: 0px;
+    right: -26px;
+    z-index: 10;
+    color: #FFFFFF;
+}
+.lion-step-mercury .lion-triangle {
+    position: absolute;
+    z-index: 10;
+    border-width: 15px 0px 15px 20px;
+    top: 0px;
+    left: 0px;
+    border-left-color: #BABABA;
+}
+.lion-step-mercury .triangle-bottom {
+    z-index: 9;
+    border-left-color: #FFFFFF;
+    border-width: 24px 0px 24px 30px;
+    top: -9px;
+    left: -4px;
+}
+.lion-step-mercury li.active {
+    background-color: #346697;
+}
+.lion-step-mercury li.active .triangle-top {
+    border-left-color: #346697;
+}
+.lion-step-mercury li.active .step {
+    color: #4B6986;
+    background-color: #CED6DE;
+}
+
+/**
+ * ============================================================
+ * 模态窗
+ * ============================================================
+ */
+
+.lion-modal {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 2px;
+    border: 1px solid #DDDDDD;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+    color: #666666;
+    position: relative;
+}
+.lion-modal .modal-title {
+    padding: 0px 5px;
+    border-bottom: 1px solid #DDDDDD;
+    color: #2E76B1;
+    height: 44px;
+    line-height: 44px;
+}
+.lion-modal .modal-title .btn-modal-close {
+    font-size: 12px;
+    float: right;
+    margin-right: 5px;
+    color: #999999;
+}
+.lion-modal .modal-title .btn-modal-close:hover {
+    color: #666666;
+}
+.lion-modal .operation {
+    text-align: right;
+    margin-bottom: 24px;
+}
+.lion-modal:before,
+.lion-modal:after {
+    content: "";
+    position: absolute;
+    font-size: 0;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: -2px;
+    border: 0 dashed transparent;
+    border-width: 10px;
+    z-index: 100;
+    top: -18px;
+    left: 50%;
+    margin-left:-10px;
+    border-bottom-style: solid;
+    border-bottom-color: #FFFFFF;
+}
+.lion-modal:after {
+    border-bottom-style: solid;
+    border-bottom-color: #DDDDDD;
+    z-index: 90;
+    top: -20px;
+}

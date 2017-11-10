@@ -38,7 +38,10 @@
 
     <!-- 静态资源由Web应用服务器默认的Servlet处理 -->
     <mvc:default-servlet-handler/>
-
+   <!-- <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/html/**" location="/html/" />
+-->
     <context:component-scan base-package="io.github.xyzc1988">
         <!-- 排除扫描service标签 -->
         <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->

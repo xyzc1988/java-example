@@ -1,15 +1,10 @@
 @charset "UTF-8";
-.demo-image {
-    width: 100%;
-}
-
 .pagination {
-    display: inline-block !important;
-    margin: 0px 0px 20px 200px !important;
+    display: inline-block;
+    margin-left: 20%;
     text-align: center;
     zoom: 1;
-    font-size: 14px;
-    font-family: "微软雅黑";
+    font: 14px/inherit "微软雅黑",sans-serif;
 }
 
 .pagination:before, .pagination:after {
@@ -26,20 +21,23 @@
     display: inline-block;
     margin: 0 3px;
     color: #4d6e86;
-    padding: 0.4em 0.7em;
+    padding: 0.5em 0.8em;
+    line-height: inherit;
 }
 
 .pagination span.disabled {
-    border: 1px solid #ebebeb;
+    border: 1px solid #ccc;
     cursor: not-allowed;
-    background: #ffffff;
+    background: #fff;
     opacity: 0.65;
+    line-height: inherit;
 }
 
 .pagination .active {
     display: inline-block;
     margin: 0 3px;
-    padding: 0.3em 0.7em;
+    padding: 0.5em 0.8em;
+    line-height: inherit;
     background: #4d6e86;
     color: #fff;
     border: 1px solid #4d6e86;
@@ -50,16 +48,21 @@
     margin: 0 3px;
     border: 1px solid #ccc;
     color: #4d6e86;
-    padding: 0.3em 0.7em;
+    padding: 0.5em 0.8em;
 }
 
-.pagination a:hover, .pagination input.jump-ipt:hover, .pagination a.jump-btn:hover {
+.pagination a:hover, .pagination input.jump-ipt:hover{
     color: #4d6e86;
-    /*! background: #eee; */
+    background: #dae5ed;
     border: 1px solid #4d6e86;
-    /*! border-radius: 3px; */
 }
 
+
+.pagination a.jump-btn:hover{
+    color: #fff;
+    background: #4d6e86;
+    border: 1px solid #4d6e86;
+}
 .now, .count {
     padding: 0 5px;
     color: #4d6e86;
@@ -72,30 +75,24 @@
 
 .pagination input {
     width: 49px;
-    height: 32px;
-    line-height: 32px;
     text-align: center;
     border: 1px solid #ccc;
+    padding: 0.5em 0.8em;
+    line-height: inherit;
 }
 
 .pagination span.page-info {
-    margin: 0 0px;
+    margin: 0 0;
 }
 
 .pagination input.jump-ipt {
-    margin: 0px;
-    background: #fff;
-    float: left;
-    padding: 0;
+    margin: 0;
+    background: #f9f9f9;
 }
 
 .pagination a.jump-btn {
-    margin: 0px;
-    background: #f9f9f9;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    padding:0;
+    margin: 0;
+    background: #dae5ed;
 }
 
 .pagination div {
