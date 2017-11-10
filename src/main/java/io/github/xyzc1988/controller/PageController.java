@@ -2,7 +2,9 @@ package io.github.xyzc1988.controller;
 
 import com.alibaba.fastjson.JSON;
 import io.github.xyzc1988.common.bean.PaginationModel;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +42,7 @@ public class PageController {
         this.getClass().getResource("/");
         // 获得类加载全包名路径 ../WEB-INF/classes/../..
         this.getClass().getResource("");
-        //spring获得类加载器根目录资源文件
+        //spring获得类加载器根目录资源文件 类似的还有   FileSystemResource,ServletContextResource等
         Resource classPathResource = new ClassPathResource("/mail/IGXE验证消息_.eml");
 
         PaginationModel paginationModel = new PaginationModel();
