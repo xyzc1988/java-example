@@ -38,10 +38,12 @@ public class PageController {
         webappRoot = System.getProperty("webapp.root");
         webappRoot = request.getServletContext().getRealPath("/");
         webappRoot = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
+
         // 获得类加载器根路径 ../WEB-INF/classes
         this.getClass().getResource("/");
         // 获得类加载全包名路径 ../WEB-INF/classes/../..
         this.getClass().getResource("");
+
         //spring获得类加载器根目录资源文件 类似的还有   FileSystemResource,ServletContextResource等
         Resource classPathResource = new ClassPathResource("/mail/IGXE验证消息_.eml");
 
