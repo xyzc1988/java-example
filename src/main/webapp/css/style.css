@@ -14,3 +14,126 @@
 .clearfix:after {
     clear: both;
 }
+
+/**
+ * ============================================================
+ * 辅助样式类
+ * ============================================================
+ */
+/*自定义背景颜色*/
+.bg-color-mercury{background-color:#F5F5F5;}
+.bg-color-red{background-color:#d9534f;border:1px solid #d5413c;}
+
+/*自定义字体颜色*/
+.color-mercury{color:#CB3E5E;}
+.color-venus{color:#429A05;}
+.moneynum{color:#CD3C63;}
+.color-black{color:#555555;}
+
+/*常用按钮*/
+.btn-common{width:70px;height:32px;padding:0px;}
+
+.lion-btn-confirm{color:#FFFFFF;background-color:#FF9900;border-color:#C6901F;}
+.lion-btn-confirm:hover{border-color:#C6901F;background-color:#EA8B0D;}
+
+/*表格统一样式*/
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #DDDDDD;
+    border-right: none;
+    border-bottom: none;
+    border-left: 1px solid #DDDDDD;
+    width: 100%;
+}
+table th,
+table td {
+    text-align: left;
+    border-top: none;
+    border-right: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    border-left: none;
+    padding: 10px 15px;
+    font-size: 12px;
+    color:#555555;
+}
+
+/*多余内容转换成省略号*/
+.lion-overflow-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*光标*/
+.pointer{cursor:pointer;}
+
+/*填充*/
+.top10{padding-top:10px;}
+
+/*竖线*/
+.bg-line{height:10px;background-color:#F5F5F5;}
+
+
+
+
+.index-top{
+    border: 1px solid #ccc;
+    width: 60%;
+    line-height: 150px;
+    margin: 10px auto;
+    box-shadow: 10px 10px 10px 1px #ccc;
+    padding: 5px;
+}
+
+
+.wrapper{
+    width:1024px;
+    margin: 0 auto;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+
+.btn{
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    padding: 0.2rem 0.5rem;
+    text-shadow: 1px 1px 2px #ccc;
+    text-decoration: none;
+    color: #888;
+}
+
+.btn:hover{
+    background: #aae;
+}
+
+.lion-btn {
+    display: inline;
+    border: 1px solid #1AA094;
+    background-color: #1AA094;
+    vertical-align: middle;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    font-weight: normal;
+    /* font-size: 12px; */
+    background-image: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    transition: all .25s;
+    -ms-transition: all .25s;
+    -moz-transition: all .25s;
+    -webkit-transition: all .25s;
+    box-shadow: 0px -2px 0px rgba(0, 0, 0, .05) inset;
+    color: #FFFFFF;
+}
+.lion-btn:hover {
+    border-color: #158E83;
+    background-color: #158E83;
+}

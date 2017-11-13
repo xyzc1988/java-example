@@ -1,12 +1,13 @@
-/**pager**/
+@charset "UTF-8";
+
 .pager {
-    padding: 0px 10px;
-    float: right;
+    padding: 10px 10px;
+    text-align: right;
+    display: block;
 }
 
 .pager span {
-    /* display: block; */
-    float: left;
+    display: inline-block;
     padding: 0.2em 0.7em;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -20,7 +21,6 @@
 
 .pager span.disabled {
     color: #999;
-    border-color: #999;
     background: #fff;
     border: solid 1px #AAE;
 }
@@ -31,8 +31,7 @@
 }
 
 .pager a {
-    display: block;
-    float: left;
+    display: inline-block;
     padding: 0.2em 0.5em;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -47,12 +46,8 @@
 }
 
 .pager input {
-    padding: 0px 2px;
     border: solid 1px #AAE;
     width: 2.4em;
-    /* height: 22px; */
-    /* line-height: 1; */
-    float: left;
     margin-right: 5px;
     margin-bottom: 5px;
     text-align: center;
@@ -64,10 +59,9 @@
     border: solid 1px #AAE;
     height: 25px;
     line-height: 25px;
-    /* float: left; */
     margin-right: 5px;
     margin-bottom: 5px;
-    padding: 0px 3px;
+    padding: 0 3px;
     color: #404040;
     background: white;
 }

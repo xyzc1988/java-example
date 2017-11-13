@@ -101,7 +101,7 @@
                 data: JSON.stringify(_self.opts.params),
                 dataType: _self.opts.dataType,
                 contentType: _self.opts.contentType
-            }).then(function (data) {
+            }).done(function (data) {
                 // 调用success方法进行html渲染
                 _self.opts.success(data);
 
@@ -116,10 +116,12 @@
                     _self.renderHtml(pageTextArr);
                     _self.eventBind();
                 }
-            }, function (XMLHttpRequest, textStatus, errorThrown) {
-                if (_self.opts.error) {
-                    _self.opts.error(XMLHttpRequest, textStatus, errorThrown)
-                }
+            }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+                    if (_self.opts.error) {
+                        _self.opts.error(XMLHttpRequest, textStatus, errorThrown)
+                    }
+            }).always(function () {
+                _self.opts.complete();
             })
         },
         getTotalPage: function () {
