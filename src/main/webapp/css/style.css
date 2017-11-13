@@ -15,6 +15,18 @@
     clear: both;
 }
 
+/*
+    解决margin重叠的方法
+    都用float来定位（有条件要求，适用范围较广）
+    为父元素添加overflow不为visiable 的属性 （适用范围极广，推荐使用）
+    为元素添加border（一般不用）
+    父元素增加padding属性（改变尺寸）
+    使用绝对定位（适用范围较窄）
+*/
+.overflow-hidden{
+    overflow:hidden;
+    zoom:1;
+}
 /**
  * ============================================================
  * 辅助样式类
@@ -89,7 +101,7 @@ table td {
 
 .wrapper{
     width:1024px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 5px;
     background: #fff;
     border: 1px solid #ccc;
