@@ -22,16 +22,12 @@
             });
 
         });
-        //实现图片的预加载
-        function preloadImg(srcArr){
-            if(srcArr instanceof Array){
-                for(var i=0; i<srcArr.length; i++){
-                    var oImg = new Image();
-                    oImg.src = srcArr[i];
-                }
-            }
-        }
 
+        /**
+         * 可以避免ie6内存泄露和onload不触发
+         * @param url
+         * @param callback
+         */
         function loadImage(url, callback) {
             var img = new Image(); //创建一个Image对象，实现图片的预下载
             img.onload = function(){
@@ -40,6 +36,26 @@
             };
             img.src = url;
         }
+
+        function getPreloadImgAttr(url,callback){
+            var oImg = new Image(); //创建一个Image对象,实现图片的预加载
+            if(oImg.complete){
+                //如果图片已经存在于浏览器缓存,直接调用回调函数
+                callback.call(oImg);
+                return; //直接返回,不再处理onload事件
+            }
+            oImg.onload = function(){
+                //图片下载完毕时异步调用callback函数
+                oImg.onload = null;
+                callback.call(oImg);
+            };
+            oImg.src = url;　　    // 看下一节,其实应当先进行onload的绑定,再赋值给src
+        }
+        getPreloadImgAttr('image/example.jpg',function(){
+            console.log(this.width, this.height);
+        });
+
+
     </script>
 </head>
 <body>

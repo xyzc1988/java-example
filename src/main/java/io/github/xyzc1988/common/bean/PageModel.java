@@ -3,50 +3,46 @@ package io.github.xyzc1988.common.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DataTables分页封装类
- * Created by zhangcheng on 2017/8/30.
- */
 public class PageModel<T> {
     /**
-     * 过滤前总记录数
+     * 当前页码
      */
-    private long iTotalRecords = 0;
+    private long pageIndex = 0;
     /**
-     * 过滤后总记录数
+     * 每页行数
      */
-    private long iTotalDisplayRecords = 0;
+    private long pageSize = 10;
     /**
-     * 页面发来的参数，原样返回
+     * 总行数
      */
-    private String sEcho;
+    private long totalCount = 0;
     /**
      * 数据集
      */
-    private List<T> data = new ArrayList();
+    private List<T> data = new ArrayList<>();
 
-    public long getiTotalRecords() {
-        return iTotalRecords;
+    public long getPageIndex() {
+        return pageIndex;
     }
 
-    public void setiTotalRecords(long iTotalRecords) {
-        this.iTotalRecords = iTotalRecords;
+    public void setPageIndex(long pageIndex) {
+        this.pageIndex = pageIndex;
     }
 
-    public long getiTotalDisplayRecords() {
-        return iTotalDisplayRecords;
+    public long getPageSize() {
+        return pageSize;
     }
 
-    public void setiTotalDisplayRecords(long iTotalDisplayRecords) {
-        this.iTotalDisplayRecords = iTotalDisplayRecords;
+    public void setPageSize(long pageSize) {
+        this.pageSize = pageSize;
     }
 
-    public String getsEcho() {
-        return sEcho;
+    public long getTotalCount() {
+        return totalCount;
     }
 
-    public void setsEcho(String sEcho) {
-        this.sEcho = sEcho;
+    public void setTotalCount(long totalCount) {
+        this.totalCount = totalCount;
     }
 
     public List<T> getData() {
@@ -55,15 +51,5 @@ public class PageModel<T> {
 
     public void setData(List<T> data) {
         this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "PageModel{" +
-                "iTotalRecords=" + iTotalRecords +
-                ", iTotalDisplayRecords=" + iTotalDisplayRecords +
-                ", sEcho='" + sEcho + '\'' +
-                ", data=" + data +
-                '}';
     }
 }
