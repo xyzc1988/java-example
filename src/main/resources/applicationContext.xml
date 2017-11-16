@@ -5,18 +5,36 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
-        <property name="jdbcUrl" value="jdbc:oracle:thin:@(DESCRIPTION =(FAILOVER = ON)(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.1.69.173)(PORT = 1521)))(CONNECT_DATA =(SERVICE_NAME = orclbi.ebupt.net)(FAILOVER_MODE =(TYPE = SELECT)(METHOD = BASIC)(RETRIES = 20)(DELAY = 5))))"></property>
-        <property name="user" value="CEAnalyse"></property>
-        <property name="password" value="123456"></property>
+
+    <!-- 配置读取外部配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+          p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" />
+
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml" />
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource"><ref bean="dataSource" /></property>
+    <!-- mapper 扫描器 (如增加新的模块mapper,则使用,号隔开即可)-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+        <property name="basePackage" value="com.hxht.org.mapper,com.hxht.map.mapper,com.hxht.permission.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource"><ref bean="dataSource" /></property>
+    <!-- 实例化jdbcTemplate,同时注入数据源 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="dataSource" />
+
+    <!-- 配置事务管理器 -->
+    <bean id="txManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
     </bean>
 </beans>
