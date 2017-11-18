@@ -1,6 +1,7 @@
 package io.github.xyzc1988.controller;
 
 import com.alibaba.fastjson.JSON;
+import io.github.xyzc1988.annotation.Auth;
 import io.github.xyzc1988.common.bean.PageModel;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ContextLoader;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,6 +27,12 @@ import java.util.Map;
 @RequestMapping("/page")
 public class PageController {
 
+    @RequestMapping()
+    public String pageIndex(HttpServletRequest request, HttpServletResponse response) {
+        return "page";
+    }
+
+    @Auth
     @RequestMapping("/getPage")
     @ResponseBody
     public PageModel getPage(@RequestBody Map<String, Object> params, HttpServletRequest request) throws URISyntaxException {

@@ -163,4 +163,34 @@ $.fn.serializeJson = function () {
         }
     });
     return o;
-}
+};
+
+$.ajaxSetup({
+    dataFilter : function(data, type){
+        var json = null;
+        try {
+            json = JSON.parse(data);
+            type = 'json';
+        } catch (e) {
+            console.log(e);
+        }
+        if(type == 'json' && json != null){
+            if(json.status=='notlogin'){//ajax请求，发现session过期，重新刷新页面，跳转到登录页面
+                $.reLogin();
+                return null;
+            }
+            if(json.status=='error'){
+                layer.alert(json.msg, {icon: 2});
+                /* alertInfo(json.msg); */
+                return false;
+            }
+        }
+        return data;
+    },
+    cache: false,
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        console.log(errorThrown);
+        console.log(XMLHttpRequest);
+        layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系厂商。");
+    }
+});

@@ -1,5 +1,6 @@
 package io.github.xyzc1988.controller;
 
+import io.github.xyzc1988.exception.BusinessException;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -23,6 +24,10 @@ import java.nio.file.Paths;
 @RequestMapping("/image")
 public class ImageController {
 
+    @RequestMapping()
+    public String imageIndex(HttpServletRequest request, HttpServletResponse response) {
+        return "image";
+    }
     @RequestMapping("/getImage")
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
 
@@ -43,15 +48,20 @@ public class ImageController {
     @RequestMapping("/getBase64Image")
     @ResponseBody
     public String getBase64Image(HttpServletRequest request, HttpServletResponse response) {
-
+        if (1 > 0) {
+            throw new BusinessException("ceshi");
+        }
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(path + "/images/1.png"));
             String base64String = Base64.encodeBase64String(bytes);
             return "data:image/png;base64," + base64String;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         return null;
     }
 
