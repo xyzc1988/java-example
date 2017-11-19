@@ -75,9 +75,12 @@ public class MyInterceptor implements HandlerInterceptor {
                 pw.write(JSON.toJSONString(result));
                 pw.flush();
                 pw.close();
+              /*  request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request,response);*/
             } else {
                 logger.info("interceptor：跳转到loggerin页面！");
+               /* request.getRequestDispatcher("/WEB-INF/error/error.jsp").forward(request,response);*/
                 response.sendRedirect("https://www.baidu.com/?redirect=" + request.getRequestURL());
+
             }
             return false;
         }
