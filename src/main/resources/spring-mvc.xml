@@ -42,6 +42,9 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->
+   <!-- <mvc:view-controller path="/" view-name="forward:/index.jsp"/>-->
+
     <!-- 自定义拦截链配置 -->
     <mvc:interceptors>
         <!--对所有的请求进行拦截-->
