@@ -22,9 +22,9 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
 
         // 根据不同错误转向不同页面
         if(ex instanceof PermissionException) {
-            return new ModelAndView("api-error", model);
+            return new ModelAndView("/WEB-INF/error/api-error.jsp", model);
         }else  {
-            return new ModelAndView("error", model);
+            return new ModelAndView("/WEB-INF/error/error.jsp", model);
         }
     }
 }
