@@ -1,26 +1,17 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script>
-    <!--jQuery2.0+不再支持IE8-->
-    <!--[if lte IE 8]>
-    <script src="http://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/es5-shim/4.5.9/es5-shim.min.js"></script>
-    <script src="https://cdn.bootcss.com/es5-shim/4.5.9/es5-sham.min.js"></script>
-    <script src="https://cdn.bootcss.com/json3/3.3.2/json3.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="../js/nprogress/nprogress.js"></script>
-    <script type="text/javascript" src="../js/pagination/jqPagination.js"></script>
-    <script type="text/javascript" src="../js/pagination/jquery.pagination.js"></script>
-    <!-- <script type="text/javascript" src="./js/pagination/mricode.pagination.js"></script>-->
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../js/pagination/pager.css"/>
-    <link rel="stylesheet" href="../js/pagination/pagination.css"/>
-    <link rel="stylesheet" href="../js/nprogress/nprogress.css"/>
+    <%@ include file="/common/include.jsp" %>
 
+    <script type="text/javascript" src="${ctx}/js/nprogress/nprogress.js"></script>
+    <script type="text/javascript" src="${ctx}/js/pagination/jqPagination.js"></script>
+    <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
+    <link rel="stylesheet" href="${ctx}/js/pagination/pager.css"/>
+    <link rel="stylesheet" href="${ctx}/js/pagination/pagination.css"/>
+    <link rel="stylesheet" href="${ctx}/js/nprogress/nprogress.css"/>
     <script type="text/javascript">
         $(function () {
             NProgress.start();
@@ -28,7 +19,7 @@
              * 纯前端分页
              */
             $.ajax({
-                url: "../page/getPage",
+                url: "${ctx}/page/getPage",
                 type: "POST",
                 dataType: "JSON",
                 data: JSON.stringify({pageIndex: 1, pageSize: 1}),
@@ -44,7 +35,7 @@
                     callback: function (api) {
                         var pageIndex = api.getPageIndex();
                         $.ajax({
-                            url: "../page/getPage",
+                            url: "${ctx}/page/getPage",
                             type: "POST",
                             dataType: "JSON",
                             data: JSON.stringify({pageIndex: pageIndex, pageSize: 1}),
@@ -61,7 +52,7 @@
              * ajax整合进分页插件
              */
             $('#jqPagination').jqPagination({
-                url: "../page/getPage",
+                url: "${ctx}/page/getPage",
                 pageSize: 1,
                 paginationClass: "pager",
                 showJump: true,

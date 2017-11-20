@@ -1,23 +1,21 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript" src="../js/jquery/jquery-3.2.1.js"></script>
-
-    <link rel="stylesheet" href="../css/normalize.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <%@ include file="/common/include.jsp" %>
     <script type="text/javascript">
         $(function () {
             $.ajax({
-                url: "../image/getBase64Image",
+                url: "${ctx}/image/getBase64Image",
                 type: "GET"
             }).then(function (data) {
                 $("#image1").attr("src", data);
 
             });
 
-            loadImage("../images/10.png",function (img) {
+            loadImage("${ctx}/images/10.png",function (img) {
                 $("#preloadImg").attr("src", img.src);
             });
 
@@ -60,8 +58,8 @@
 </head>
 <body>
 <div>
-    <img id="image2" src="../image/getImageBody" style="width: 100px;height: 100px;"/>
-    <img id="image" src="../image/getImage" style="width: 50px;height: 50px;"/>
+    <img id="image2" src="${ctx}/image/getImageBody" style="width: 100px;height: 100px;"/>
+    <img id="image" src="${ctx}/image/getImage" style="width: 50px;height: 50px;"/>
     <img id="image1" style="width: 50px;height: 50px;"/>
 
     <img id="preloadImg" style="width: 50px;height: 50px;"/>

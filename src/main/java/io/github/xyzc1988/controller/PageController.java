@@ -1,16 +1,20 @@
 package io.github.xyzc1988.controller;
 
 import com.alibaba.fastjson.JSON;
+import io.github.xyzc1988.annotation.Auth;
 import io.github.xyzc1988.common.bean.PageModel;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.ContextLoader;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,6 +29,13 @@ import java.util.Map;
 @RequestMapping("/page")
 public class PageController {
 
+    @Auth
+    @RequestMapping()
+    public String pageIndex(HttpServletRequest request, HttpServletResponse response) {
+        return "page";
+    }
+
+    @Auth
     @RequestMapping("/getPage")
     @ResponseBody
     public PageModel getPage(@RequestBody Map<String, Object> params, HttpServletRequest request) throws URISyntaxException {
@@ -53,5 +64,16 @@ public class PageController {
             e1.printStackTrace();
         }
         return paginationModel;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity responseEntityTest(@PathVariable long id) {
+       /* URI location = URI.create("aaaa");
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.setLocation(location);
+        responseHeaders.set("MyResponseHeader", "MyValue");
+        return new ResponseEntity("Hello World", responseHeaders, HttpStatus.CREATED);*/
+
+        return ResponseEntity.ok().header("MyResponseHeader", "MyValue").body("Hello World");
     }
 }
