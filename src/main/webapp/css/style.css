@@ -124,7 +124,7 @@ table td {
 .lion-btn {
     display: inline;
     border: 1px solid #1AA094;
-    background-color: #1AA094;
+    background: #1AA094 none;
     vertical-align: middle;
     padding: 0.3rem 0.9rem;
     border-radius: 2px;
@@ -133,7 +133,6 @@ table td {
     cursor: pointer;
     font-weight: normal;
     /* font-size: 12px; */
-    background-image: none;
     -o-user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;

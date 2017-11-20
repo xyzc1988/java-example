@@ -1,6 +1,6 @@
 package io.github.xyzc1988.controller;
 
-import io.github.xyzc1988.exception.BusinessException;
+import io.github.xyzc1988.exception.ApiException;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -49,7 +49,7 @@ public class ImageController {
     @ResponseBody
     public String getBase64Image(HttpServletRequest request, HttpServletResponse response) {
         if (1 > 0) {
-            throw new BusinessException("ceshi");
+            throw new ApiException("ceshi");
         }
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {

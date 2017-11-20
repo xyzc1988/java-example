@@ -21,7 +21,7 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
         model.put("ex", ex);
 
         // 根据不同错误转向不同页面
-        if(ex instanceof PermissionException) {
+        if(ex instanceof ApiException) {
             return new ModelAndView("/WEB-INF/error/api-error.jsp", model);
         }else  {
             return new ModelAndView("/WEB-INF/error/error.jsp", model);
