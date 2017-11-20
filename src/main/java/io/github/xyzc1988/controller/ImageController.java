@@ -47,9 +47,9 @@ public class ImageController {
 
     @RequestMapping("/getBase64Image")
     @ResponseBody
-    public String getBase64Image(HttpServletRequest request, HttpServletResponse response) {
-        if (1 > 0) {
-            throw new ApiException("ceshi");
+    public String getBase64Image(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (true) {
+            throw new ApiException("aaa");
         }
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {

@@ -3,10 +3,13 @@ package io.github.xyzc1988.interceptor;
 import com.alibaba.fastjson.JSON;
 import io.github.xyzc1988.annotation.Auth;
 import io.github.xyzc1988.common.bean.Result;
+import io.github.xyzc1988.exception.ApiException;
 import io.github.xyzc1988.exception.PermissionException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +17,7 @@ import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -39,7 +43,7 @@ public class MyInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+                             HttpServletResponse response, Object handler) throws IOException {
         logger.info("进入拦截器 preHandle");
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
@@ -58,6 +62,7 @@ public class MyInterceptor implements HandlerInterceptor {
         //获取注解
         Auth auth = handler2.getMethodAnnotation(Auth.class);
         if (auth == null) {
+            // throw new ApiException("aaa");
             return true;
         }else {
             //采用ajax 提交的
@@ -65,16 +70,14 @@ public class MyInterceptor implements HandlerInterceptor {
             String accept = request.getHeader("accept");
         /*    XMLHttpRequest application/json*/
             if (StringUtils.isNotBlank(isAjax) &&StringUtils.isNotBlank(accept)) {
-                response.setCharacterEncoding("utf-8");
-                response.setContentType("application/json; charset=utf-8");
-                OutputStream out = response.getOutputStream();
-                PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));
-                Map result = new HashMap();
-                result.put("status", "error");
-                result.put("msg", "没有权限");
-                pw.write(JSON.toJSONString(result));
-                pw.flush();
-                pw.close();
+                response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+                try( OutputStream out = response.getOutputStream();
+                     PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));){
+                    Map result = new HashMap();
+                    result.put("status", "error");
+                    result.put("msg", "没有权限");
+                    pw.write(JSON.toJSONString(result));
+                }
               /*  request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request,response);*/
             } else {
                 logger.info("interceptor：跳转到loggerin页面！");

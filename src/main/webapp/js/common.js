@@ -182,7 +182,7 @@ $.ajaxSetup({
             if(json.status=='error'){
                 layer.alert(json.msg, {icon: 2});
                 /* alertInfo(json.msg); */
-                return false;
+                return null;
             }
         }
         return data;

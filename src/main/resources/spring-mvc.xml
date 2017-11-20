@@ -85,5 +85,5 @@
         </property>
     </bean>-->
     <!-- 实现HandlerExceptionResolver实现异常处理-->
-   <!-- <bean id="myExceptionHandler" class="io.github.xyzc1988.exception.MyExceptionHandler"/>-->
+    <bean id="myExceptionHandler" class="io.github.xyzc1988.exception.MyExceptionHandler"/>
 </beans>

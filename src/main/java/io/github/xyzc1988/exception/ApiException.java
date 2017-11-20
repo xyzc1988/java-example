@@ -5,7 +5,7 @@ package io.github.xyzc1988.exception;
  */
 public class ApiException extends RuntimeException {
 
-    private boolean status;
+    private boolean success;
 
     public ApiException() {
         super();
@@ -24,15 +24,15 @@ public class ApiException extends RuntimeException {
 
     public ApiException(boolean success, String message) {
         super(message);
-        this.setStatus(success);
+        this.setSuccess(success);
     }
 
 
-    public boolean isStatus() {
-        return status;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }
