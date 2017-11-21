@@ -13,6 +13,8 @@
             }).then(function (data) {
                 $("#image1").attr("src", data);
 
+            },function () {
+                layer.alert("失败了");
             });
 
             loadImage("${ctx}/images/10.png",function (img) {

@@ -67,23 +67,23 @@
     </mvc:interceptors>
 
     <!-- 处理文件上传处理 -->
-   <!-- <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8"/>-->
+   <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8"/>-->
 
-    <!--SimpleMappingExceptionResolver实现异常处理 不适用于JSON请求-->
-<!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        &lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;
-        <property name="defaultErrorView" value="error"></property>
-        &lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;
-        <property name="exceptionAttribute" value="ex"></property>
-        &lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;
-        <property name="exceptionMappings">
-            <props>
-                <prop kio.github.xyzc1988.exception.PermissionExceptionceptiontion">error</prop>
-                &lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;
-            </props>
-        </property>
-    </bean>-->
-    <!-- 实现HandlerExceptionResolver实现异常处理-->
-    <bean id="myExceptionHandler" class="io.github.xyzc1988.exception.MyExceptionHandler"/>
+    <!--SimpleMappingExceptionResolver实现异常处理 不适用于JSON请求 会覆盖其他异常处理方式-->
+    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--&lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;-->
+        <!--<property name="defaultErrorView" value="error"></property>-->
+        <!--&lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;-->
+        <!--<property name="exceptionAttribute" value="ex"></property>-->
+        <!--&lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key= "io.github.xyzc1988.exception.ApiException">/error/error</prop>-->
+                <!--&lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!-- 实现HandlerExceptionResolver实现异常处理 覆盖@ExceptionHandler-->
+    <!--<bean id="myExceptionHandler" class="io.github.xyzc1988.exception.MyExceptionHandler"/>-->
 </beans>

@@ -3,30 +3,34 @@ package io.github.xyzc1988.exception;
 import io.github.xyzc1988.common.bean.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by zhangcheng on 2017/11/18 14:14.
  * @ControllerAdvice + @ExceptionHandler 实现全局的 Controller 层的异常处理
  */
-// @ControllerAdvice
+@ControllerAdvice
 public class ApiExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApiExceptionHandler.class);
-
-
 
     /**
      * 处理所有业务异常
      * @param e
      * @return
      */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ApiException.class)
     @ResponseBody
-    Result handleBusinessException(ApiException e){
+    Result handleBusinessException(HttpServletRequest request, ApiException e){
         LOGGER.error(e.getMessage(), e);
 
         Result result = new Result();

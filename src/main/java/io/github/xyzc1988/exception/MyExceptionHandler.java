@@ -3,6 +3,7 @@ package io.github.xyzc1988.exception;
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +19,6 @@ import java.util.Map;
  */
 public class MyExceptionHandler implements HandlerExceptionResolver {
 
-
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                          Exception ex) {
         Map<String, Object> model = new HashMap<String, Object>();
@@ -32,7 +32,7 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
                 Map result = new HashMap();
                 result.put("status", "error");
                 result.put("msg", "没有权限");
-                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                // response.setStatus(HttpStatus.UNAUTHORIZED.value());
                 pw.write(JSON.toJSONString(result));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
