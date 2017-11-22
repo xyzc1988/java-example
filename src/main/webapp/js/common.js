@@ -194,3 +194,45 @@ $.ajaxSetup({
         layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系厂商。");
     }
 });
+
+var loadingOfAjaxIndex;
+$(function(){
+    var _ajax=$.ajax;
+    $.ajax=function(opt){
+        var fn = {
+            error:function(XMLHttpRequest, textStatus, errorThrown){},
+            success:function(data, textStatus){}
+        }
+        if(opt.error){
+            fn.error=opt.error;
+        }
+        if(opt.success){
+            fn.success=opt.success;
+        }
+        var _opt = $.extend(opt,{
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                fn.error(XMLHttpRequest, textStatus, errorThrown);
+            },
+            success:function(data, textStatus){
+                if(data != null){
+                    fn.success(data, textStatus);
+                }
+            },
+            beforeSend:function(XHR){
+                loadingOfAjaxIndex = layer.load(0, {shade: false});
+            },
+            complete:function(XHR, TS){
+                layer.close(loadingOfAjaxIndex);
+            }
+        });
+        return _ajax(_opt).then(function (data,textStatus,jqXHR) {
+            if (data != null) {
+                return $.Deferred().resolve(data).promise();
+            }else {
+                return $.Deferred().reject().promise();
+            }
+        },function (jqXHR,textStatus, errorThrown) {
+            layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系管理员。",{icon: 2});
+        });
+    }
+});

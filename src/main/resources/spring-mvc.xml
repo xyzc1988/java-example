@@ -25,14 +25,13 @@
     <!-- <mvc:resources mapping="/css/**" location="/css/" />
      <mvc:resources mapping="/js/**" location="/js/" />
      <mvc:resources mapping="/html/**" location="/html/" />
- -->
+     -->
+
+    <!-- 扫描加载组装所以配置文件 context:component-scan注册后可以省略<context:annotation-config/>-->
     <context:component-scan base-package="io.github.xyzc1988">
         <!-- 排除扫描service标签 -->
         <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
     </context:component-scan>
-    <!-- 加载组装所以配置文件 context:component-scan注册后可以省略当前配置
-        <context:annotation-config/>
-     -->
 
     <!-- 视图解析器 -->
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
@@ -40,6 +39,7 @@
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
+        <property name="order" value="2" />
     </bean>
 
     <!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->
@@ -66,8 +66,15 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <!-- 处理文件上传处理 -->
-   <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8"/>-->
+
+    <!-- 文件上传配置 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8" /> <!-- 默认编码 (ISO-8859-1) -->
+        <property name="maxInMemorySize" value="10240" /> <!-- 最大内存大小 (10240) -->
+        <property name="maxUploadSize" value="-1" /> <!-- 最大文件大小，-1为无限止(-1) -->
+        <property name="uploadTempDir" value="upload/temp" /> <!-- 上传文件的临时路径 -->
+    </bean>
 
     <!--SimpleMappingExceptionResolver实现异常处理 不适用于JSON请求 会覆盖其他异常处理方式-->
     <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->

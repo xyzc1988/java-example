@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class DropTable {
     public static void main(String[] args) {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("spring-context.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("spring-config.xml");
         JdbcTemplate jdbcTemplate = (JdbcTemplate) ac.getBean("jdbcTemplate");
         String tables = "PRT_INDDB_COM_DATA_H,PRT_INDDB_COM_DATA_D,PRT_INDDB_COM_DATA_M,PRT_INDDB_MKACT_DATA_H," +
                 "PRT_INDDB_MKACT_DATA_D,PRT_INDDB_MKACT_DATA_M,PRT_INDDB_USR_CDC_M";
