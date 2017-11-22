@@ -1,13 +1,12 @@
 package io.github.xyzc1988.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by zhangcheng on 2017/11/18 15:17.
+ *
  */
 @RestController
 public class ErrorController {

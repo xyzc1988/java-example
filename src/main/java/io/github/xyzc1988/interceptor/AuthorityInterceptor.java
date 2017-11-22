@@ -24,6 +24,7 @@ import java.util.Map;
 
 /**
  * Created by zhangcheng on 2017/11/16.
+ *
  */
 public class AuthorityInterceptor implements HandlerInterceptor {
 
