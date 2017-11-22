@@ -64,7 +64,6 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         //获取注解
         Auth auth = handler2.getMethodAnnotation(Auth.class);
         if (auth == null) {
-            // throw new ApiException("aaa");
             return true;
         }else {
             //采用ajax 提交的
