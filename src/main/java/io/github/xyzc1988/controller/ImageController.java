@@ -2,10 +2,12 @@ package io.github.xyzc1988.controller;
 
 import io.github.xyzc1988.exception.ApiException;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.support.ServletContextResource;
 
@@ -28,6 +30,8 @@ public class ImageController {
     public String imageIndex(HttpServletRequest request, HttpServletResponse response) {
         return "image";
     }
+
+
     @RequestMapping("/getImage")
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
 
@@ -48,9 +52,9 @@ public class ImageController {
     @RequestMapping("/getBase64Image")
     @ResponseBody
     public String getBase64Image(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (true) {
-            throw new ApiException("aaa");
-        }
+        // if (true) {
+        //     throw new ApiException("aaa");
+        // }
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(path + "/images/1.png"));

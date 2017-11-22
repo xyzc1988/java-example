@@ -8,8 +8,8 @@
 <body style="margin: 0;padding: 0;background-color: #f5f5f5;">
 <div id="center-div" style="text-align: center">
                 <img width="30%" height="auto" src="${ctx}/images/error.png"/>
-                <p> <%=exception.getMessage()%></p>
-                <p>错误信息:${ex}</p>
+             <%--   <p> <%=exception.getMessage()%></p>
+                <p>错误信息:${ex}</p>--%>
                 <p>
                     <a href="javascript:history.go(-1);">返回</a>!!!
                 </p>

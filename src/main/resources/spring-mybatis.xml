@@ -14,7 +14,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 配置DataSource -->
+    <!-- 1. 配置DataSource -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
           p:url="${jdbc.url}" p:username="${jdbc.username}" p:password="${jdbc.password}" >
@@ -34,12 +34,12 @@
         <property name="dataSource" ref="dataSource" />
         <!-- 加载mybatis的全局配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath:io/github/xyzc1988/mapper/*Mapper.xml"/>
+       <!-- <property name="mapperLocations" value="classpath:io/github/xyzc1988/mapper/*Mapper.xml"/>-->
     </bean>
 
-    <!-- mapper 扫描器 (如增加新的模块mapper,则使用,号隔开即可)-->
+    <!-- mapper 扫描器 basePackage指定sql映射文件/接口所在的包 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+        <!-- mapper接口路径,多个包使用半角逗号隔开 -->
         <property name="basePackage" value="io.github.xyzc1988.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
@@ -58,23 +58,22 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!-- 事务扫描开始(开启@Transactional) -->
+    <!-- 使用声明式事务(开启@Transactional) -->
     <tx:annotation-driven transaction-manager="txManager" />
 
+    <!--<aop:config>-->
+        <!--<aop:pointcut expression="execution(* io.github.xyzc1988.service..*.*(..))" id="pointService" />-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="pointService" />-->
+    <!--</aop:config>-->
 
-
-    <aop:config>
-        <aop:pointcut expression="execution(* io.github.xyzc1988.service..*.*(..))" id="pointService" />
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointService" />
-    </aop:config>
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="delete*" propagation="REQUIRED" />
-            <tx:method name="list*" />
-            <tx:method name="load*"  />
-        </tx:attributes>
-    </tx:advice>
+    <!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
+        <!--<tx:attributes>-->
+            <!--<tx:method name="add*" propagation="REQUIRED" />-->
+            <!--<tx:method name="update*" propagation="REQUIRED" />-->
+            <!--<tx:method name="delete*" propagation="REQUIRED" />-->
+            <!--<tx:method name="list*" />-->
+            <!--<tx:method name="load*"  />-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
 
 </beans>

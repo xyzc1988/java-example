@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by zhangcheng on 2017/11/18 13:58.
  * 将此类注册为spring管理的bean
  */
-public class MyExceptionHandler implements HandlerExceptionResolver {
+public class MyExceptionHandlerResolver implements HandlerExceptionResolver {
 
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
                                          Exception ex) {

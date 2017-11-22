@@ -2,21 +2,19 @@ package io.github.xyzc1988.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import io.github.xyzc1988.annotation.Auth;
-import io.github.xyzc1988.common.bean.Result;
-import io.github.xyzc1988.exception.ApiException;
-import io.github.xyzc1988.exception.PermissionException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -27,9 +25,12 @@ import java.util.Map;
 /**
  * Created by zhangcheng on 2017/11/16.
  */
-public class MyInterceptor implements HandlerInterceptor {
+public class AuthorityInterceptor implements HandlerInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(AuthorityInterceptor.class);
+
+    @Resource
+    private HttpSession httpSession;
     /**
      * 在业务处理器处理请求之前被调用
      * 如果返回false
