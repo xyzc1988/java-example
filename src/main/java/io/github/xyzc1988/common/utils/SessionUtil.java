@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
  * @author liwei
  * <p><B>last update </B> by liwei @ 2014-12-16</p>
  */
-@Component
 public enum SessionUtil {
 
     /**

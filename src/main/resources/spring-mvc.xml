@@ -26,9 +26,9 @@
      -->
 
     <!-- 扫描加载组装所以配置文件 context:component-scan注册后可以省略<context:annotation-config/>-->
-    <context:component-scan base-package="io.github.xyzc1988">
-        <!-- 排除扫描service标签 -->
-        <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> -->
+    <!-- SpringMVC容器中只注册带有@controller注解的Bean,使用use-default-filters="false"排除其他注解的Bean,否则@service中事务会失效 -->
+    <context:component-scan base-package="io.github.xyzc1988" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
     <!-- 视图解析器 -->

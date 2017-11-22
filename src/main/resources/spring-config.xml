@@ -9,6 +9,11 @@
     <!-- 配置读取外部配置文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" />
 
+    <!-- Spring容器中注册非@controller注解的Bean -->
+    <context:component-scan base-package="io.github.xyzc1988">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
     <import resource="spring-mybatis.xml"/>
 
 </beans>
