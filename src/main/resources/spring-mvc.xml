@@ -29,16 +29,14 @@
     <!-- SpringMVC容器中只注册带有@controller注解的Bean,使用use-default-filters="false"排除其他注解的Bean,否则@service中事务会失效 -->
     <context:component-scan base-package="io.github.xyzc1988" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!-- 视图解析器 -->
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-        <property name="order" value="2"/>
-    </bean>
+    <mvc:view-resolvers>
+        <mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
+    </mvc:view-resolvers>
 
     <!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->
     <!-- <mvc:view-controller path="/" view-name="forward:/index.jsp"/>-->
@@ -64,7 +62,6 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
-
     <!-- 文件上传配置 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="defaultEncoding" value="UTF-8"/> <!-- 默认编码 (ISO-8859-1) -->
@@ -72,6 +69,7 @@
         <property name="maxUploadSize" value="-1"/> <!-- 最大文件大小，-1为无限止(-1) -->
         <property name="uploadTempDir" value="upload/temp"/> <!-- 上传文件的临时路径 -->
     </bean>
+
 
     <!--SimpleMappingExceptionResolver实现异常处理 不适用于JSON请求 会覆盖其他异常处理方式-->
     <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->

@@ -36,6 +36,9 @@ public class SessionUtil {
         httpSession.removeAttribute(sessionEnu.key);
     }
 
+    public static SessionUtil getInstance() {
+        return instance;
+    }
 
     public enum SessionEnum {
         /**

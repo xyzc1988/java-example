@@ -17,20 +17,20 @@ import java.io.FileWriter;
 public class SerializationExampleTreeModel {
 
     public static void main(String[] args) throws Exception {
-        //´´½¨Ò»¸ö½Úµã¹¤³§,ÎªÎÒÃÇÌá¹©ËùÓĞ½Úµã
+        //åˆ›å»ºä¸€ä¸ªèŠ‚ç‚¹å·¥å‚,ä¸ºæˆ‘ä»¬æä¾›æ‰€æœ‰èŠ‚ç‚¹
         JsonNodeFactory factory = new JsonNodeFactory(false);
-        //´´½¨Ò»¸öjson factoryÀ´Ğ´tree modleÎªjson
+        //åˆ›å»ºä¸€ä¸ªjson factoryæ¥å†™tree modleä¸ºjson
         JsonFactory jsonFactory = new JsonFactory();
-        //´´½¨Ò»¸öjsonÉú³ÉÆ÷
+        //åˆ›å»ºä¸€ä¸ªjsonç”Ÿæˆå™¨
         JsonGenerator generator = jsonFactory.createGenerator(new FileWriter(new File("d:/temp/country2.json")));
-        //×¢Òâ£¬Ä¬ÈÏÇé¿öÏÂ¶ÔÏóÓ³ÉäÆ÷²»»áÖ¸¶¨¸ù½Úµã£¬ÏÂÃæÉè¸ù½ÚµãÎªcountry
+        //æ³¨æ„ï¼Œé»˜è®¤æƒ…å†µä¸‹å¯¹è±¡æ˜ å°„å™¨ä¸ä¼šæŒ‡å®šæ ¹èŠ‚ç‚¹ï¼Œä¸‹é¢è®¾æ ¹èŠ‚ç‚¹ä¸ºcountry
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode country = factory.objectNode();
 
         country.put("country_id", "China");
         country.put("birthDate", "1949-10-01");
 
-        //ÔÚJavaÖĞ£¬ListºÍArray×ª»¯Îªjsonºó¶ÔÓ¦µÄ¸ñÊ½·ûºÅ¶¼ÊÇ"obj:[]"
+        //åœ¨Javaä¸­ï¼ŒListå’ŒArrayè½¬åŒ–ä¸ºjsonåå¯¹åº”çš„æ ¼å¼ç¬¦å·éƒ½æ˜¯"obj:[]"
         ArrayNode nation = factory.arrayNode();
         nation.add("Han").add("Meng").add("Hui").add("WeiWuEr").add("Zang");
         country.set("nation", nation);

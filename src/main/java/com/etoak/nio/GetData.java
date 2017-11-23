@@ -1,7 +1,5 @@
 package com.etoak.nio;
 
-import com.sun.beans.editors.ByteEditor;
-
 import java.nio.ByteBuffer;
 
 /**

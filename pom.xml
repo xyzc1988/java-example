@@ -31,7 +31,18 @@
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.3.12.v20160915</version>
+                <version>9.4.7.v20170914</version>
+                <configuration>
+                    <httpConnector>
+                        <port>8081</port> <!-- 访问端口,默认8080 -->
+                    </httpConnector>
+                    <stopPort>9966</stopPort>
+                    <stopKey>foo</stopKey>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/${project.build.finalName}</contextPath>
+                    </webApp>
+                </configuration>
             </plugin>
             <!-- 远程部署 -->
            <!-- <plugin>
@@ -60,8 +71,9 @@
         </resources>
     </build>
 
-    <!--阿里云镜像-->
+
     <repositories>
+        <!--阿里云镜像-->
         <repository>
             <id>aliyun-maven</id>
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
@@ -362,13 +374,11 @@
             <version>1.5.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>10.2.0.1.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+        <!--<dependency>-->
+            <!--<groupId>com.oracle</groupId>-->
+            <!--<artifactId>ojdbc14</artifactId>-->
+            <!--<version>10.2.0.1.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
@@ -380,7 +390,6 @@
             <version>1.7</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
