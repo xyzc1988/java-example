@@ -29,7 +29,6 @@ import java.util.Map;
 @RequestMapping("/page")
 public class PageController {
 
-    @Auth
     @RequestMapping()
     public String pageIndex(HttpServletRequest request, HttpServletResponse response) {
         return "page";

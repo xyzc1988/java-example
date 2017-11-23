@@ -58,15 +58,15 @@
     };
     var Pagination = function () {
         this.pagerElement = null,
-        this.commonHtmlText = {
-            spanHtml: "<span class='{0}'>{1}</span>",
-            pageIndexHtml: "<a href='javascript:void(0)' class='page-btn' data-page='{0}'>{1}</a>",
-            rightHtml: "<span class='page-info'>&nbsp;共{0}页&nbsp;</span> <div>" +
-            "<input class='jump-ipt' value={1} /><a href='javascript:void(0)' class='jump-btn'>跳转</a>" +
-            "</div>",
-            clearFloatHtml: "<div style='clear:both;'></div>",
-            stringEmpty: ""
-        }
+            this.commonHtmlText = {
+                spanHtml: "<span class='{0}'>{1}</span>",
+                pageIndexHtml: "<a href='javascript:void(0)' class='page-btn' data-page='{0}'>{1}</a>",
+                rightHtml: "<span class='page-info'>&nbsp;共{0}页&nbsp;</span> <div>" +
+                "<input class='jump-ipt' value={1} /><a href='javascript:void(0)' class='jump-btn'>跳转</a>" +
+                "</div>",
+                clearFloatHtml: "<div style='clear:both;'></div>",
+                stringEmpty: ""
+            }
     }
     Pagination.prototype = {
         init: function (obj, option) {
@@ -116,10 +116,11 @@
                     _self.renderHtml(pageTextArr);
                     _self.eventBind();
                 }
-            }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-                    if (_self.opts.error) {
-                        _self.opts.error(XMLHttpRequest, textStatus, errorThrown)
-                    }
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                // 异常统一处理
+                // if (_self.opts.error) {
+                //     _self.opts.error(XMLHttpRequest, textStatus, errorThrown)
+                // }
             }).always(function () {
                 _self.opts.complete();
             })
@@ -179,8 +180,8 @@
             }
             for (var i = interval.start; i < interval.end; i++) {
                 if (i == this.opts.pageIndex) {
-                    pageTextArr.push(this.createSpan(i + 1,this.opts.activeClass));
-                }else {
+                    pageTextArr.push(this.createSpan(i + 1, this.opts.activeClass));
+                } else {
                     pageTextArr.push(this.createIndexText(i, i + 1));
 
                 }
@@ -246,7 +247,7 @@
                 var $jumpInput = $element.find(".jump-ipt");
                 var index = parseInt($jumpInput.val()) - 1;
 
-                if (!isNaN(index)  && index <= _self.opts.totalPage) {
+                if (!isNaN(index) && index <= _self.opts.totalPage) {
                     _self.doPage(index);
                 } else {
                     $jumpInput.focus();

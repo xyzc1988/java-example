@@ -102,12 +102,41 @@ var common = (function ($) {
         }
 
         return uuid.join('');
-    }
+    };
+
+    _self.ajax = function (opts) {
+        var loadingOfAjaxIndex = layer.load(0, {shade: false});
+        var defaults = {
+            type: "POST",
+            dataType: "json",
+            contentType: "application/json"
+        };
+
+        if (opts.data && "object" === typeof opts.data) {
+            opts.data = JSON.stringify(data);
+        }
+
+        return $.ajax($.extend({}, defaults, opts)).then(function (data, textStatus, jqXHR) {
+            if (data.status === 'notlogin') {
+                //ajax请求，发现session过期，重新刷新页面，跳转到登录页面
+                $.reLogin();
+            }
+            if (data.status === 'unauthorized') {
+                layer.alert(data.msg, {icon: 2});
+                return $.Deferred().reject().promise();
+            }
+
+            return $.Deferred().resolve(data).promise();
+        }, function () {
+            layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系管理员。", {icon: 2});
+            return $.Deferred().reject().promise();
+        }).always(function () {
+            layer.close(loadingOfAjaxIndex);
+        });
+    };
 
     return _self;
 })(jQuery);
-
-
 
 
 /**
@@ -165,74 +194,69 @@ $.fn.serializeJson = function () {
     return o;
 };
 
-$.ajaxSetup({
-    dataFilter : function(data, type){
-        var json = null;
-        try {
-            json = JSON.parse(data);
-            type = 'json';
-        } catch (e) {
-            console.log(e);
-        }
-        if(type == 'json' && json != null){
-            if(json.status=='notlogin'){//ajax请求，发现session过期，重新刷新页面，跳转到登录页面
-                $.reLogin();
-                return null;
+// $.ajaxSetup({
+//     dataFilter: function (data, type) {
+//         var json = null;
+//         try {
+//             json = JSON.parse(data);
+//             type = 'json';
+//         } catch (e) {
+//             console.log(e);
+//         }
+//         if (type === 'json' && json !== null) {
+//             if (json.status === 'notlogin') {//ajax请求，发现session过期，重新刷新页面，跳转到登录页面
+//                 $.reLogin();
+//                 return null;
+//             } else if (json.status === 'unauthorized') {
+//                 //信息框-例1
+//                 layer.alert(json.msg, {icon: 2});
+//                 return null;
+//             } else {
+//                 return data;
+//             }
+//         } else {
+//             return data;
+//         }
+//     },
+//     cache: false,
+//     error: function (XMLHttpRequest, textStatus, errorThrown) {
+//         console.log(errorThrown);
+//         console.log(XMLHttpRequest);
+//         layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系管理员。");
+//     }
+// });
+
+$(function () {
+    var _ajax = $.ajax;
+    var loadingOfAjaxIndex;
+    $.ajax = function (opt) {
+        var _opt = $.extend(opt, {
+            beforeSend: function (jqXHR) {
+                loadingOfAjaxIndex = layer.load(0, {shade: false});
             }
-            if(json.status=='error'){
-                layer.alert(json.msg, {icon: 2});
-                /* alertInfo(json.msg); */
-                return null;
+        });
+        return _ajax(_opt).then(function (data, textStatus, jqXHR) {
+            try {
+                if (data.status === 'notlogin') {//ajax请求，发现session过期，重新刷新页面，跳转到登录页面
+                    $.reLogin();
+                    return $.Deferred().reject().promise();
+                } else if (data.status === 'unauthorized') {
+                    //信息框-例1
+                    layer.alert(data.msg, {icon: 2});
+                    return $.Deferred().reject().promise();
+                } else {
+                    return $.Deferred().resolve(data).promise();
+                }
+            } catch (e) {
+                console.log(e);
+                return $.Deferred().reject().promise();
             }
-        }
-        return data;
-    },
-    cache: false,
-    error: function (XMLHttpRequest, textStatus, errorThrown) {
-        console.log(errorThrown);
-        console.log(XMLHttpRequest);
-        layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系厂商。");
+        }, function (jqXHR, textStatus, errorThrown) {
+            layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系管理员。", {icon: 2});
+            return $.Deferred().reject().promise();
+        }).always(function () {
+            layer.close(loadingOfAjaxIndex);
+        });
     }
 });
 
-var loadingOfAjaxIndex;
-$(function(){
-    var _ajax=$.ajax;
-    $.ajax=function(opt){
-        var fn = {
-            error:function(XMLHttpRequest, textStatus, errorThrown){},
-            success:function(data, textStatus){}
-        }
-        if(opt.error){
-            fn.error=opt.error;
-        }
-        if(opt.success){
-            fn.success=opt.success;
-        }
-        var _opt = $.extend(opt,{
-            error:function(XMLHttpRequest, textStatus, errorThrown){
-                fn.error(XMLHttpRequest, textStatus, errorThrown);
-            },
-            success:function(data, textStatus){
-                if(data != null){
-                    fn.success(data, textStatus);
-                }
-            },
-            beforeSend:function(XHR){
-                loadingOfAjaxIndex = layer.load(0, {shade: false});
-            },
-            complete:function(XHR, TS){
-                layer.close(loadingOfAjaxIndex);
-            }
-        });
-        return _ajax(_opt).then(function (data,textStatus,jqXHR) {
-            if (data != null) {
-                return $.Deferred().resolve(data).promise();
-            }else {
-                return $.Deferred().reject().promise();
-            }
-        },function (jqXHR,textStatus, errorThrown) {
-            layer.alert("数据加载失败，请您稍后刷新页面，如仍然有问题请联系管理员。",{icon: 2});
-        });
-    }
-});

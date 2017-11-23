@@ -10,7 +10,23 @@
     <Appenders>
         <!--输出控制台的配置-->
         <Console name="Console" target="SYSTEM_OUT">
-            <!--输出日志的格式-->
+            <!--
+            输出日志的格式
+            %d{参数}               : 日期,如%d{dd MMM yyyy HH:mm:ss,SSS}
+            %p或%-5level           : 日志级别
+            %c{36}或%logger{参数}  : logger名称
+            %C{1}或%class{参数}    : 类名,效果与%c{参数}相同
+            %M或%method            : 方法名
+            %L                     : 行号
+            %l                     : 输出完整包路径,使用该参数会影响日志输出的性能
+            %m或%msg               : 日志内容
+            %n                     : 换行符
+            PatternLayout中包含的特殊字符包括\t,\n,\r,\f，用\\输出单斜线，用%%输出%。
+            对齐修饰，在任何pattern和%之间加入带符号数字指定对齐样式。
+            如:%10.20c表示对logger的信息进行处理;%-10.20m表示对message进行处理。
+            整数表示右对齐，负数表示左对齐；整数位表示输出信息的最小10个字符，如果输出信息不够10个字符，将用空格补齐；
+            小数位表示输出信息的最大字符数，如果超过20个字符，则只保留最后20个字符的信息。
+            -->
             <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%p] (%C{1}\:%L) - %m%n"/>
             <!-- <ThresholdFilter level="INFO" onMatch="DENY" onMismatch="ACCEPT"/>-->
         </Console>
@@ -29,13 +45,16 @@
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
-            <!--<DefaultRolloverStrategy max="10">-->
-                <!--<Delete basePath="${baseDir}" maxDepth="2">-->
-                    <!--<IfFileName glob="*/info-*.log.gz"/>-->
-                    <!--<IfLastModified age="60d"/>-->
-                <!--</Delete>-->
-            <!--</DefaultRolloverStrategy>-->
-            <!--<DirectWriteRolloverStrategy maxFiles="10"/>-->
+            <!-- DefaultRolloverStrategy默认同一文件夹下存放7个文件,滚动覆盖 -->
+            <!--
+            <DefaultRolloverStrategy max="10">
+                <Delete basePath="${baseDir}" maxDepth="2">
+                    <IfFileName glob="*/info-*.log.gz"/>
+                    <IfLastModified age="60d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+            <DirectWriteRolloverStrategy maxFiles="10"/>
+            -->
         </RollingFile>
         <RollingFile name="RollingFileError" fileName="${baseDir}/error.log"
                      filePattern="${baseDir}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.error.gz">
@@ -58,6 +77,10 @@
         <Logger name="org.springframework" level="INFO"/>
         <Logger name="org.mybatis" level="INFO"/>
         <Logger name="org.elasticsearch" level="INFO"/>
+        <!-- mybatis打印日志,配置mapper接口包路径,DEBUG打印SQL,TRACE打印结果集 -->
+        <Logger name="io.github.xyzc1988.mapper" level="DEBUG" additivity="false">
+            <Appender-ref ref="Console"/>
+        </Logger>
         <!-- 根logger的设置-->
         <Root level="INFO">
             <Appender-ref ref="Console"/>

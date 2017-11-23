@@ -2,6 +2,7 @@ package io.github.xyzc1988.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import io.github.xyzc1988.annotation.Auth;
+import io.github.xyzc1988.exception.PermissionException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,6 @@ import java.util.Map;
 
 /**
  * Created by zhangcheng on 2017/11/16.
- *
  */
 public class AuthorityInterceptor implements HandlerInterceptor {
 
@@ -32,6 +32,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 
     @Resource
     private HttpSession httpSession;
+
     /**
      * 在业务处理器处理请求之前被调用
      * 如果返回false
@@ -46,48 +47,41 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws IOException {
-        logger.info("进入拦截器 preHandle");
-        String requestUri = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        String url = requestUri.substring(contextPath.length());
 
-        logger.info("requestUri:" + requestUri);
-        logger.info("contextPath:" + contextPath);
-        logger.info("url:" + url);
-
-        if (handler instanceof DefaultServletHttpRequestHandler) {
-            logger.info("DefaultServlet处理");
+        if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-
         HandlerMethod handler2 = (HandlerMethod) handler;
         //获取注解
         Auth auth = handler2.getMethodAnnotation(Auth.class);
         if (auth == null) {
             return true;
-        }else {
-            //采用ajax 提交的
-            String isAjax = request.getHeader("x-requested-with");
-            String accept = request.getHeader("accept");
-        /*    XMLHttpRequest application/json*/
-            if (StringUtils.isNotBlank(isAjax) &&StringUtils.isNotBlank(accept)) {
-                response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
-                try( OutputStream out = response.getOutputStream();
-                     PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));){
-                    Map result = new HashMap();
-                    result.put("status", "error");
-                    result.put("msg", "没有权限");
-                    pw.write(JSON.toJSONString(result));
-                }
-              /*  request.getRequestDispatcher("/WEB-INF/error.jsp").forward(request,response);*/
-            } else {
-                logger.info("interceptor：跳转到loggerin页面！");
-               /* request.getRequestDispatcher("/WEB-INF/error/error.jsp").forward(request,response);*/
-                response.sendRedirect("https://www.baidu.com/?redirect=" + request.getRequestURL());
-
-            }
-            return false;
         }
+
+        String requestUri = request.getRequestURI();
+
+        logger.info("进入权限拦截器:{}", requestUri);
+        //采用ajax 提交的
+        String ajaxHeader = request.getHeader("x-requested-with");
+        String accept = request.getHeader("accept");
+        /*  XMLHttpRequest application/json */
+        if (StringUtils.isNotBlank(ajaxHeader) && StringUtils.isNotBlank(accept)) {
+            throw new PermissionException();
+            // response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            // try (OutputStream out = response.getOutputStream();
+            //      PrintWriter pw = new PrintWriter(new OutputStreamWriter(out, "utf-8"));) {
+            //     Map result = new HashMap();
+            //     result.put("status", "error");
+            //     result.put("msg", "没有权限");
+            //     pw.write(JSON.toJSONString(result));
+            // }
+        } else {
+            logger.info("interceptor：跳转到loggerin页面！");
+            // request.getRequestDispatcher("/WEB-INF/error/error.jsp").forward(request,response);
+            response.sendRedirect("https://www.baidu.com/?redirect=" + request.getRequestURL());
+
+        }
+        return false;
     }
 
     @Override

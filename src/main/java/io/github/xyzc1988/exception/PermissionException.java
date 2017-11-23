@@ -1,9 +1,11 @@
 package io.github.xyzc1988.exception;
 
 /**
- * Created by zhangcheng on 2017/11/18 11:03.
+ * Created by zhangcheng on 2017/11/18 14:14.
  */
-public class PermissionException extends RuntimeException{
+public class PermissionException extends RuntimeException {
+
+    private boolean status;
 
     public PermissionException() {
         super();
@@ -20,14 +22,17 @@ public class PermissionException extends RuntimeException{
     }
 
 
-    public PermissionException(Throwable cause) {
-        super(cause);
+    public PermissionException(boolean success, String message) {
+        super(message);
+        this.setStatus(success);
     }
 
 
-    protected PermissionException(String message, Throwable cause,
-                                  boolean enableSuppression,
-                                  boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
