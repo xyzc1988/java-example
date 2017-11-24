@@ -44,6 +44,16 @@
                     </webApp>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.2</version>
+                <configuration>
+                    <configurationFile>src/main/resources/mybatis-generator/generatorConfig.xml</configurationFile>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+            </plugin>
             <!-- 远程部署 -->
            <!-- <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -68,9 +78,50 @@
             <resource>
                 <directory>src/main/resources</directory>
             </resource>
+            <!-- 设置对jdbc.properties进行过滤，即这些文件中的${key}会被替换掉为真正的值 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>spring-mybatis.xml</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
         </resources>
+        <!--第二种方式2.1,指定 filter-->
+        <!--
+        <filters>
+            <filter>src/main/filters/${deploy.env}/jdbc.properties</filter>
+        </filters>
+        -->
     </build>
-
+    <!--
+        profiles配置多环境加载资源文件两种方式
+        1. profiles->profile->build-filters-filter加载指定资源文件对源文件进行属性替换
+        2. profiles->profile->properties设置变量,build-filters-filter指定加载变量指定资源文件
+        两种方式都需要在build->resources->resource->filtering设置为true,开启过滤并设置build->resources->includes->include指定需要被替换属性的源文件
+    -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <!-- 默认激活 -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!--第一种方式-->
+            <build>
+                <filters>
+                    <filter>src/main/filters/dev/jdbc.properties</filter>
+                </filters>
+            </build>
+        </profile>
+        <profile>
+            <id>product</id>
+            <!--第二种方式2.2-->
+            <properties>
+                <deploy.env>product</deploy.env>
+            </properties>
+        </profile>
+    </profiles>
 
     <repositories>
         <!--阿里云镜像-->
@@ -259,12 +310,6 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.6</version>
         </dependency>
 
         <dependency>
