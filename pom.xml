@@ -54,19 +54,23 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-            <!-- 远程部署 -->
-           <!-- <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.0</version>
                 <configuration>
-                    <url>http://xxxxxx.xx.xxx:8080/manager/text</url>
-                    <server>test</server>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
+                    <archive>
+                        <addMavenDescriptor>true</addMavenDescriptor>
+                    </archive>
+                    <warName>${project.build.finalName}</warName>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/filters/${package.environment}</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
-            </plugin>-->
-
+            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -77,27 +81,17 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-            </resource>
-            <!-- 设置对jdbc.properties进行过滤，即这些文件中的${key}会被替换掉为真正的值 -->
-            <resource>
-                <directory>src/main/resources</directory>
                 <includes>
-                    <include>spring-mybatis.xml</include>
+                    <include>**/*</include>
                 </includes>
-                <filtering>true</filtering>
             </resource>
         </resources>
-        <!--第二种方式2.1,指定 filter-->
-        <!--
-        <filters>
-            <filter>src/main/filters/${deploy.env}/jdbc.properties</filter>
-        </filters>
-        -->
     </build>
     <!--
-        profiles配置多环境加载资源文件两种方式
+        profiles配置多环境加载资源文件的几种方式
         1. profiles->profile->build-filters-filter加载指定资源文件对源文件进行属性替换
         2. profiles->profile->properties设置变量,build-filters-filter指定加载变量指定资源文件
+        3. 利用插件maven-war-plugin
         两种方式都需要在build->resources->resource->filtering设置为true,开启过滤并设置build->resources->includes->include指定需要被替换属性的源文件
         ps.也可以使用spring profile进行处理
     -->
@@ -108,18 +102,14 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <!--第一种方式-->
-            <build>
-                <filters>
-                    <filter>src/main/filters/dev/jdbc.properties</filter>
-                </filters>
-            </build>
+            <properties>
+                <package.environment>dev</package.environment>
+            </properties>
         </profile>
         <profile>
             <id>product</id>
-            <!--第二种方式2.2-->
             <properties>
-                <deploy.env>product</deploy.env>
+                <package.environment>product</package.environment>
             </properties>
         </profile>
     </profiles>
