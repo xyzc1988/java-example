@@ -99,6 +99,7 @@
         1. profiles->profile->build-filters-filter加载指定资源文件对源文件进行属性替换
         2. profiles->profile->properties设置变量,build-filters-filter指定加载变量指定资源文件
         两种方式都需要在build->resources->resource->filtering设置为true,开启过滤并设置build->resources->includes->include指定需要被替换属性的源文件
+        ps.也可以使用spring profile进行处理
     -->
     <profiles>
         <profile>
