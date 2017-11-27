@@ -5,6 +5,11 @@
     <!-- Web容器加载顺序ServletContext-context-param-listener-filter-servlet -->
     <display-name>java-example</display-name>
 
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>${package.environment}</param-value>
+    </context-param>
+
     <!-- 指定Spring的配置文件 -->
     <!-- 否则Spring会默认从WEB-INF下寻找配置文件,contextConfigLocation属性是Spring内部固定的 -->
     <context-param>
@@ -24,18 +29,23 @@
     </listener>
 
     <!-- RequestContextListener将Spring容器与Web容器结合的更加密切.这是可选配置,可与与scope="request"搭配使用 -->
-    <!--<listener>-->
-        <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
-    <!--</listener>-->
+    <!--
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    -->
 
     <!-- 监听项目根目录,默认保存为webapp.root为key的系统属性-->
     <listener>
         <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
     </listener>
-   <!-- <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>myWebapp.root</param-value>
-    </context-param>-->
+    <!-- 自定义webapp.root -->
+    <!--
+    <context-param>
+         <param-name>webAppRootKey</param-name>
+         <param-value>myWebapp.root</param-value>
+     </context-param>
+     -->
 
     <!-- 解决乱码问题 -->
     <!-- forceEncoding默认为false,此时效果可大致理解为request.setCharacterEncoding("UTF-8") -->
