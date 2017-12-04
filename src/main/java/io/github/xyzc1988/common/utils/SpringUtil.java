@@ -1,14 +1,22 @@
 package io.github.xyzc1988.common.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import javax.annotation.PostConstruct;
 
 /**
  * 获取spring管理的bean对象工具类
  * Created by zhangcheng on 2017/8/30.
  */
-public class SpringUtil extends SpringBeanAutowiringSupport {
+@Component
+public class SpringUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(SpringUtil.class);
 
     @Autowired
     private BeanFactory beanFactory;
@@ -35,6 +43,11 @@ public class SpringUtil extends SpringBeanAutowiringSupport {
 
     public static SpringUtil getInstance() {
         return instance;
+    }
+
+    @PostConstruct
+    private void init() {
+        logger.info("@PostConstruct初始化......");
     }
 
 }
