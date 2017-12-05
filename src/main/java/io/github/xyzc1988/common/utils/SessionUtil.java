@@ -36,43 +36,29 @@ public class SessionUtil {
         httpSession.removeAttribute(sessionEnu.key);
     }
 
-    public static SessionUtil getInstance() {
-        return instance;
-    }
 
     public enum SessionEnum {
         /**
          * 验证码
          */
-        IMG_CODE("login.imgcode"),
-
+        IMG_CODE("loginImgcode"),
         /**
          * 当前登录用户
          */
-        CURRENT_USER("current.user"),
-
-        /**
-         * 当前登录用户所拥有的所有菜单
-         */
-        CURRENT_USER_MENU("current.user.menu"),
+        CURRENT_USER("currentUser"),
         /**
          * 当前登录用户所拥有的所有菜单MAP
          */
-        CURRENT_USER_MENU_MAP("current.user.menu.map"),
+        CURRENT_USER_MENU_MAP("currentUserMenuMap"),
         /**
-         * 当前登录用户所拥有的所有菜单MAP
+         * 当前登录用户所拥有的所有菜单名称Set
          */
-        CURRENT_USER_MENU_SET("current.user.menu.set"),
-
-        /**
-         * 当前登录用户所拥有的所有菜单树
-         */
-        CURRENT_USER_MENU_TREE("current.user.menu.tree"),
+        CURRENT_USER_MENU_SET("currentUserMenuSet"),
 
         /**
          * 当前登录用户的恶意代码缓存map，退出失效
          */
-        CURRENT_USER_YARA_MAP("current.user.yara.map"),;
+        CURRENT_USER_YARA_MAP("currentUserYaraMap"),;
 
         private SessionEnum(String key) {
             this.key = key;

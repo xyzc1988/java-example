@@ -74,7 +74,9 @@
     <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
     <Loggers>
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
-        <Logger name="org.springframework" level="INFO"/>
+        <Logger name="org.springframework" level="INFO" additivity="false">
+            <Appender-ref ref="Console"/>
+        </Logger>
         <Logger name="org.mybatis" level="INFO"/>
         <Logger name="org.elasticsearch" level="INFO"/>
         <!-- mybatis打印日志,配置mapper接口包路径,DEBUG打印SQL,TRACE打印结果集 -->
@@ -84,7 +86,7 @@
         <!-- 根logger的设置-->
         <Root level="INFO">
             <Appender-ref ref="Console"/>
-            <Appender-ref ref="RollingFileInfo"/>
+            <!--<Appender-ref ref="RollingFileInfo"/>-->
             <!--<Appender-ref ref="RollingFileError"/>-->
         </Root>
     </Loggers>
