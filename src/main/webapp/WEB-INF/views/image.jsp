@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,7 +17,7 @@
                 layer.alert("失败了");
             });
 
-            loadImage("${ctx}/images/10.png",function (img) {
+            loadImage("${ctx}/img/10.png",function (img) {
                 $("#preloadImg").attr("src", img.src);
             });
 
@@ -51,7 +51,7 @@
             };
             oImg.src = url;　　    // 看下一节,其实应当先进行onload的绑定,再赋值给src
         }
-        getPreloadImgAttr('image/example.jpg',function(){
+        getPreloadImgAttr('img/example.jpg',function(){
             console.log(this.width, this.height);
         });
 

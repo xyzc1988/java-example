@@ -1,13 +1,10 @@
 package io.github.xyzc1988.controller;
 
-import io.github.xyzc1988.exception.ApiException;
 import org.apache.commons.codec.binary.Base64;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.support.ServletContextResource;
 
@@ -35,7 +32,7 @@ public class ImageController {
     @RequestMapping("/getImage")
     public void getImage(HttpServletRequest request, HttpServletResponse response) {
 
-        String fileName = request.getServletContext().getRealPath("/") + "images\\1.png";
+        String fileName = request.getServletContext().getRealPath("/") + "img\\1.png";
 
         try {
             byte[] bytes = Files.readAllBytes(Paths.get(fileName));
@@ -57,7 +54,7 @@ public class ImageController {
         // }
         String path = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         try {
-            byte[] bytes = Files.readAllBytes(Paths.get(path + "/images/1.png"));
+            byte[] bytes = Files.readAllBytes(Paths.get(path + "/img/1.png"));
             String base64String = Base64.encodeBase64String(bytes);
             return "data:image/png;base64," + base64String;
 
@@ -73,7 +70,7 @@ public class ImageController {
     @RequestMapping("/getImageBody")
     @ResponseBody
     public byte[] getImageBody(HttpServletRequest request, HttpServletResponse response) {
-        ServletContextResource servletContextResource = new ServletContextResource(ContextLoader.getCurrentWebApplicationContext().getServletContext(), "/images/1.png");
+        ServletContextResource servletContextResource = new ServletContextResource(ContextLoader.getCurrentWebApplicationContext().getServletContext(), "/img/1.png");
         try {
             InputStream inputStream = servletContextResource.getInputStream();
             byte[] bytes = FileCopyUtils.copyToByteArray(inputStream);

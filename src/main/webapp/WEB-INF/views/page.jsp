@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,12 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <%@ include file="/common/include.jsp" %>
 
-    <script type="text/javascript" src="${ctx}/js/nprogress/nprogress.js"></script>
+    <script type="text/javascript" src="${ctx}/static/nprogress/nprogress.js"></script>
     <script type="text/javascript" src="${ctx}/js/pagination/jqPagination.js"></script>
     <script type="text/javascript" src="${ctx}/js/pagination/jquery.pagination.js"></script>
     <link rel="stylesheet" href="${ctx}/js/pagination/pager.css"/>
     <link rel="stylesheet" href="${ctx}/js/pagination/pagination.css"/>
-    <link rel="stylesheet" href="${ctx}/js/nprogress/nprogress.css"/>
+    <link rel="stylesheet" href="${ctx}/static/nprogress/nprogress.css"/>
     <script type="text/javascript">
         $(function () {
             NProgress.start();
