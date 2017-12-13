@@ -51,9 +51,9 @@ public class AuthorityInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        HandlerMethod handler2 = (HandlerMethod) handler;
+        HandlerMethod HandlerMethod = (HandlerMethod) handler;
         //获取注解
-        Auth auth = handler2.getMethodAnnotation(Auth.class);
+        Auth auth = HandlerMethod.getMethodAnnotation(Auth.class);
         if (auth == null) {
             return true;
         }
