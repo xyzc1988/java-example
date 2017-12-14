@@ -16,7 +16,7 @@
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-    .show-grid [class^="col-"]{
+    .show-grid [class^="col-"] {
         border: 1px solid #ccc;
         background-color: #eee;
     }
@@ -73,16 +73,46 @@
             <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
             <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
         </div>
-
         <p>除了列在分界点清除响应， 您可能需要 重置偏移, 后推或前拉某个列。请看此栅格实例。</p>
         <div class="row show-grid">
             <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
             <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
         </div>
-
         <div class="row show-grid">
             <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
             <div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
+        </div>
+        <h2>列偏移</h2>
+        <div class="row show-grid">
+            <div class="col-md-4">.col-md-4</div>
+            <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+            <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+        </div>
+        <div class="row show-grid">
+            <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+        </div>
+        <p>You can also override offsets from lower grid tiers with .col-*-offset-0 classes.</p>
+        <div class="row show-grid">
+            <div class="col-xs-6 col-sm-4">col-xs-6 col-sm-4</div>
+            <div class="col-xs-6 col-sm-4">col-xs-6 col-sm-4</div>
+            <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0">col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-0</div>
+        </div>
+        <h2>嵌套列</h2>
+        <div class="row show-grid">
+            <div class="col-sm-9">
+                Level 1: .col-sm-9
+                <div class="row show-grid">
+                    <div class="col-xs-8 col-sm-6">
+                        Level 2: .col-xs-8 .col-sm-6
+                    </div>
+                    <div class="col-xs-4 col-sm-6">
+                        Level 2: .col-xs-4 .col-sm-6
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
