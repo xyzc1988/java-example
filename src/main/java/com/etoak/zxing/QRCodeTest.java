@@ -52,7 +52,7 @@ public class QRCodeTest {
      */
     @Test
     public void testDecode() {
-        String filePath = "D://zxing.png";
+        String filePath = "F://1517278524.png";
         BufferedImage image;
         try {
             image = ImageIO.read(new File(filePath));
@@ -62,6 +62,7 @@ public class QRCodeTest {
             Map<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
             hints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
             Result result = new MultiFormatReader().decode(binaryBitmap, hints);// 对图像进行解码
+            System.out.println(result.getText());
             JSONObject content = JSONObject.parseObject(result.getText());
             System.out.println("图片中内容：  ");
             System.out.println("author： " + content.getString("author"));
